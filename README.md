@@ -1,1 +1,1 @@
-# Sneaker-configurator
+# Sneaker-configurator-frontend
