@@ -1,6 +1,37 @@
 <script setup>
     //import ref, reactive and onMounted from 'vue';
     import { ref, reactive, onMounted } from 'vue';
+    const email = ref('');
+    const password = ref('');
+    
+    const signUp = async () => {
+    try {
+        const response = await fetch('http://localhost:3000/users/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: email.value,
+            password: password.value
+        })
+        });
+
+        const json = await response.json();
+
+        if (json.status === 'success') {
+            let feedback = document.querySelector('.alert');
+                feedback.textContent = "Account created successfully";
+                feedback.classList.remove('hidden');
+        }else{
+            let feedback = document.querySelector('.alert');
+                feedback.textContent = "Account creation failed";
+                feedback.classList.remove('hidden');
+        }
+    } catch (error) {
+        console.error('Error during signup:', error);
+    }
+    };
 </script>
 <template>
   <div class="app">
@@ -11,15 +42,15 @@
         <div class="signup">
             <div>
             <label for="email">Email</label>
-            <input type="text" class="input--text" name="email" id="email">
+            <input type="text" class="input--text" name="email" id="email" v-model="email">
             </div>
             
             <div>
             <label for="password">Password</label>
-            <input type="password" class="input--text" name="password" id="password">
+            <input type="password" class="input--text" name="password" id="password" v-model="password">
             </div>
             
-            <button class="btn btn--primary">Let's go</button>
+            <button @click="signUp" class="btn btn--primary">Let's go</button>
         </div>
     </div>
 </template>

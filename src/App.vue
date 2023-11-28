@@ -1,9 +1,9 @@
 <script setup>
-import Login from './components/Login/Login.vue';
+import Signup from './components/Signup/Signup.vue';
 </script>
 
 <template>
-      <Login />
+      <Signup />
 </template>
 
 <style scoped>
