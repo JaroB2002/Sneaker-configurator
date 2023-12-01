@@ -1,1 +1,1 @@
-# Sneaker-configurator-frontend
+# Swear London moderator

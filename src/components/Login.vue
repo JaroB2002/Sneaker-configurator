@@ -3,7 +3,7 @@
     const email = ref('');
     const password = ref('');
     
-    const loginIn = async () => {
+    const logIn = async () => {
     try {
         const response = await fetch('http://localhost:3000/users/login', {
         method: 'POST',
@@ -44,7 +44,7 @@
         <div class="alert hidden">
             Here is some feedback
         </div>
-        <div class="signup">
+        <div class="login">
             <div>
             <label for="email">Email</label>
             <input type="text" class="input--text" name="email" id="email" v-model="email">
