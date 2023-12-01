@@ -53,7 +53,7 @@
             <input type="password" class="input--text" name="password" id="password" v-model="password">
             </div>
             
-            <button @click="signUp" class="btn btn--primary">Let's go</button>
+            <button @click="signUp" class="btn btn--primary">Sign up</button>
         </div>
     </div>
 </template>
