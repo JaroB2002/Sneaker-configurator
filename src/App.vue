@@ -1,9 +1,14 @@
 <script setup>
-import Signup from './components/Signup/Signup.vue';
+
 </script>
 
 <template>
-      <Signup />
+
+
+<h1>THEAPP &copy;</h1>
+      <!-- <Signup />
+      <Login /> -->
+      <router-view></router-view>
 </template>
 
 <style scoped>
