@@ -12,10 +12,10 @@ import Overview from './components/Overview.vue'
 import DetailOrder from './components/DetailOrder.vue'
 
 const routes = [
-    { path: '/', component: Overview},
-    { path: '/orders/:id', component: DetailOrder, props: true},
-    { path: '/login', component: Login },
-    { path: '/signup', component: Signup }, // zowat de get variabele, een dynamische route aangezien je niet op voorhand weet wat id is
+    { path: '/', component: Login},
+    { path: '/orders', component: Overview },
+    { path: '/orders/:id', component: DetailOrder, props: true}, // zowat de get variabele, een dynamische route aangezien je niet op voorhand weet wat id is
+    { path: '/signup', component: Signup },
 ]
 
 const router = VueRouter.createRouter({
