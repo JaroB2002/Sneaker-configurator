@@ -23,6 +23,9 @@
             let feedback = document.querySelector('.alert');
                 feedback.textContent = "Account created successfully";
                 feedback.classList.remove('hidden');
+            let token = json.data.token;
+                localStorage.setItem('token', token);
+                window.location.href = "app.html";
         }else{
             let feedback = document.querySelector('.alert');
                 feedback.textContent = "Account creation failed";
