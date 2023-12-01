@@ -11,7 +11,7 @@ import Signup from './components/Signup.vue'
 
 const routes = [
     { path: '/', component: Login },
-    { path: '/login/:id', component: Signup }, // zowat de get variabele, een dynamische route aangezien je niet op voorhand weet wat id is
+    { path: '/signup', component: Signup }, // zowat de get variabele, een dynamische route aangezien je niet op voorhand weet wat id is
 ]
 
 const router = VueRouter.createRouter({
