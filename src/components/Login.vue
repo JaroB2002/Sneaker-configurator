@@ -40,6 +40,7 @@
 <template>
     <div class="app">
         <h2 class="title">Log in with your account</h2>
+        <h3>No account yet?<a href="/#/signup">Sign Up</a></h3>
         <div class="alert hidden">
             Here is some feedback
         </div>
