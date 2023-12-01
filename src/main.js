@@ -8,9 +8,13 @@ import * as VueRouter from 'vue-router'
 // import Login & Signup from/components
 import Login from './components/Login.vue'
 import Signup from './components/Signup.vue'
+import Overview from './components/Overview.vue'
+import DetailOrder from './components/DetailOrder.vue'
 
 const routes = [
-    { path: '/', component: Login },
+    { path: '/', component: Overview},
+    { path: '/orders/:id', component: DetailOrder, props: true},
+    { path: '/login', component: Login },
     { path: '/signup', component: Signup }, // zowat de get variabele, een dynamische route aangezien je niet op voorhand weet wat id is
 ]
 
