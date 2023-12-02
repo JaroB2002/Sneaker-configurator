@@ -6,7 +6,7 @@
     
     const signUp = async () => {
     try {
-        const response = await fetch('http://localhost:3000/users/signup', {
+        const response = await fetch('https://sneaker-api-4zoy.onrender.com/users/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
