@@ -127,7 +127,7 @@ import { ref, onMounted } from 'vue'
                             <th class="px-8 py-3">Amount</th>
                             <th class="px-8 py-3">Status</th>
                             <th class="px-8 py-3">Date</th>
-                            <th class="px-8 py-3">Actions</th>
+                            <th class="px-8 py-3">Visibility</th>
                         </tr>
                     </thead>
                 </table>

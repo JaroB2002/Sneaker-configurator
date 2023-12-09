@@ -5,7 +5,7 @@
 <template>
 
 
-<h1>Londen Swear</h1>
+<h1>London Swear</h1>
       <router-view></router-view>
 </template>
 
