@@ -2,7 +2,6 @@
     import { ref } from 'vue'
     import { useRouter } from 'vue-router'; // Add this import statement
 
-    const router = useRouter();  // Make sure to define the router
 
     const order = ref({
         id: 1,
@@ -13,10 +12,6 @@
         status: 'pending',
     });
 
-    const handleClickArrow = () => {
-  // Redirect to the "/#/Orders/" page when the arrow is clicked
-  router.push('/Orders/');
-};
 
 
 </script>
@@ -79,12 +74,7 @@
           </select>
           
         </div>
-      </div>            <img
-            src="Arrow.png"
-            alt="Arrow"
-            class="cursor-pointer w-6 h-6 mt-4 mx-auto"
-            @click="handleClickArrow"
-          />
+      </div>          
           <!-- Link to "/#/Orders/" with text "Go back" -->
           <h3><a href="/#/Orders/">Go back</a></h3>
 
