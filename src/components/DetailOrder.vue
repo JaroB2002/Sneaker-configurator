@@ -64,9 +64,9 @@
             v-model="order.status"
             class="w-full p-2 border border-green-500 rounded text-green-500"
           >
-            <option value="pending">Pending</option>
+          <option value="pending" class="text-yellow-500">Pending</option>
             <option value="accepted">Accepted</option>
-            <option value="denied">Denied</option>
+            <option value="denied" class="text-red-500">Denied</option>
           </select>
         </div>
       </div>
