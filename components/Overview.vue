@@ -11,7 +11,6 @@ import { ref, onMounted } from 'vue'
             <p>Order price: {{ order.price }}</p>
             <p>Order user: {{ order.user_id }}</p>
             <p>Order sneaker: {{ order.sneaker_id }}</p>
-            
     </div>
     <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
