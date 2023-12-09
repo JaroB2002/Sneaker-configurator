@@ -25,7 +25,8 @@ import { ref, onMounted } from 'vue'
     <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
   </head>
   <body>
-             
+    <h3><a href="/#/Orders/:id">View order</a></h3>
+ 
         <main class="h-full pb-16 overflow-y-auto ">
           <div class="container grid px-6 mx-auto">
            
