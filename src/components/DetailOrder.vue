@@ -1,9 +1,5 @@
 <script setup>
     import { ref } from 'vue'
-    import { useRouter } from 'vue-router'; // Add this import statement
-
-    const router = useRouter();  // Make sure to define the router
-
     const order = ref({
         id: 1,
         date: '2023-12-01',
@@ -12,13 +8,6 @@
         totalPrice: 50.0,
         status: 'pending',
     });
-
-    const handleClickArrow = () => {
-  // Redirect to the "/#/Orders/" page when the arrow is clicked
-  router.push('/Orders/');
-};
-
-
 </script>
 
 <template>
@@ -73,21 +62,12 @@
             v-model="order.status"
             class="w-full p-2 border border-green-500 rounded text-green-500"
           >
-          <option value="pending" class="text-yellow-500">Pending</option>
+            <option value="pending">Pending</option>
             <option value="accepted">Accepted</option>
-            <option value="denied" class="text-red-500">Denied</option>
+            <option value="denied">Denied</option>
           </select>
-          
         </div>
-      </div>            <img
-            src="Arrow.png"
-            alt="Arrow"
-            class="cursor-pointer w-6 h-6 mt-4 mx-auto"
-            @click="handleClickArrow"
-          />
-          <!-- Link to "/#/Orders/" with text "Go back" -->
-          <h3><a href="/#/Orders/">Go back</a></h3>
-
+      </div>
     </div>
   </div>
 </template>
