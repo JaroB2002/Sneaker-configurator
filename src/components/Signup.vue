@@ -42,7 +42,6 @@
             <div class="md:flex md:items-center md:justify-center w-full md:h-full sm:rounded-lg md:rounded-none bg-white px-6">
                 <div class="max-w-md w-full mx-auto">
                     <div>
-                        <img class="mx-auto h-12 w-auto" src="Logo.png" alt="Logo project komt er nog in">
                         <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign up</h2>
                         <p class="mt-2 text-center text-sm text-gray-600"> of log in met je <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500">account</a>.</p>
                     </div>
