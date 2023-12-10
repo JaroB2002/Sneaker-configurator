@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+const orderCount = ref(2);
 </script>
 
 <template>
 <h1 class="text-3xl font-bold mb-4">Overview orders of this week</h1>
+    <p>Aantal bestellingen: {{ orderCount }}</p>
         <div class="order" v-for="order in orders" :key="order.id">
             <h2>Order {{ order.id }}</h2>
             <p>Order date: {{ order.order_date }}</p>
@@ -24,6 +26,7 @@ import { ref, onMounted } from 'vue'
     />
     <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
   </head>
+  
   <body>
     <h3><a href="/#/Orders/:id">View order</a></h3>
  
@@ -149,7 +152,7 @@ import { ref, onMounted } from 'vue'
       <td class="px-8 py-4 text-xs relative">
         <div x-data="{ open: false }">
           <button @click="open = !open" type="button" class="inline-flex items-center justify-between px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100 focus:outline-none">
-            Approved
+            Verzonden
 
             <svg class="w-4 h-4 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M5.293 6.293a1 1 0 011.414 0L10 9.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -159,9 +162,9 @@ import { ref, onMounted } from 'vue'
           <div x-show="open" @click.away="open = false" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg">
             <div class="rounded-md bg-white shadow-xs">
               <div class="py-1">
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Approved</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Pending</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Denied</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Verzonden</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">In productie</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Geannuleerd</a>
               </div>
             </div>
           </div>
@@ -194,7 +197,7 @@ import { ref, onMounted } from 'vue'
         </td>
         <td class="px-8 py-3 text-sm">€ 369.95</td>
         <td class="px-8 py-3 text-xs">
-          <span class="px-3 py-1 font-semibold leading-tight text-orange-700 bg-orange-100  dark:text-white dark:bg-orange-600">Pending</span>
+          <span class="px-3 py-1 font-semibold leading-tight text-orange-700 bg-orange-100  dark:text-white dark:bg-orange-600">In productie</span>
         </td>
         <td class="px-8 py-3 text-sm">12/01/2023</td>
         <td class="px-8 py-3">
@@ -226,7 +229,7 @@ import { ref, onMounted } from 'vue'
       </td>
       <td class="px-8 py-4 text-sm">€ 1276.45</td>
       <td class="px-8 py-4 text-xs">
-        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Approved</span>
+        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Verzonden</span>
       </td>
       <td class="px-8 py-4 text-sm">12/01/2023</td>
       <td class="px-8 py-4">
@@ -250,7 +253,7 @@ import { ref, onMounted } from 'vue'
       </td>
       <td class="px-8 py-4 text-sm">€73.99</td>
       <td class="px-8 py-4 text-xs">
-        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700">Denied</span>
+        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700">Geweigerd</span>
       </td>
       <td class="px-8 py-4 text-sm">12/01/2023</td>
       <td class="px-8 py-4">
@@ -280,7 +283,7 @@ import { ref, onMounted } from 'vue'
       </td>
       <td class="px-8 py-4 text-sm">€ 863.45</td>
       <td class="px-8 py-4 text-xs">
-        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Approved</span>
+        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Verzonden</span>
       </td>
       <td class="px-8 py-4 text-sm">12/01/2023</td>
       <td class="px-8 py-4">
@@ -304,7 +307,7 @@ import { ref, onMounted } from 'vue'
       </td>
       <td class="px-8 py-4 text-sm">€ 863.45</td>
       <td class="px-8 py-4 text-xs">
-        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Approved</span>
+        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Verzonden</span>
       </td>
       <td class="px-8 py-4 text-sm">12/01/2023</td>
       <td class="px-8 py-4">
@@ -328,7 +331,7 @@ import { ref, onMounted } from 'vue'
       </td>
       <td class="px-8 py-4 text-sm">€ 863.45</td>
       <td class="px-8 py-4 text-xs">
-        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Approved</span>
+        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Verzonden</span>
       </td>
       <td class="px-8 py-4 text-sm">12/01/2023</td>
       <td class="px-8 py-4">
@@ -352,7 +355,7 @@ import { ref, onMounted } from 'vue'
       </td>
       <td class="px-8 py-4 text-sm">€ 103.45</td>
       <td class="px-8 py-4 text-xs">
-        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Approved</span>
+        <span class="px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100">Verzonden</span>
       </td>
       <td class="px-8 py-4 text-sm">12/01/2023</td>
       <td class="px-8 py-4">
