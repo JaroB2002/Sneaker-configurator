@@ -141,7 +141,7 @@ import { ref, onMounted } from 'vue'
       <td class="px-8 py-4">
         <div class="flex items-center text-sm">
           <div>
-            <a href="#" class="font-semibold">Order #456789</a>
+            <a href="/#/Orders/456789" class="font-semibold">Order #456789</a>
           </div>
         </div>
       </td>
@@ -188,7 +188,7 @@ import { ref, onMounted } from 'vue'
         <td class="px-8 py-3">
           <div class="flex items-center text-sm">
             <div>
-              <a href="#" class="font-semibold">Order #987123</a>
+              <a href="/#/Orders/987123" class="font-semibold">Order #987123</a>
             </div>
           </div>
         </td>
@@ -220,7 +220,7 @@ import { ref, onMounted } from 'vue'
       <td class="px-8 py-4">
         <div class="flex items-center text-sm">
           <div>
-            <a href="#" class="font-semibold">Order #987654</a>
+            <a href="/#/Orders/987654" class="font-semibold">Order #987654</a>
           </div>
         </div>
       </td>
@@ -244,7 +244,7 @@ import { ref, onMounted } from 'vue'
       <td class="px-8 py-4">
         <div class="flex items-center text-sm">
           <div>
-            <a href="#" class="font-semibold">Order #135792</a>
+            <a href="/#/Orders/135792" class="font-semibold">Order #135792</a>
           </div>
         </div>
       </td>
@@ -274,7 +274,7 @@ import { ref, onMounted } from 'vue'
       <td class="px-8 py-4">
         <div class="flex items-center text-sm">
           <div>
-            <a href="#" class="font-semibold">Order #135792</a>
+            <a href="/#/Orders/135792" class="font-semibold">Order #135792</a>
           </div>
         </div>
       </td>
@@ -298,7 +298,7 @@ import { ref, onMounted } from 'vue'
       <td class="px-8 py-4">
         <div class="flex items-center text-sm">
           <div>
-            <a href="#" class="font-semibold">Order #987654</a>
+            <a href="/#/Orders/987654" class="font-semibold">Order #987654</a>
           </div>
         </div>
       </td>
@@ -346,7 +346,7 @@ import { ref, onMounted } from 'vue'
       <td class="px-8 py-4">
         <div class="flex items-center text-sm">
           <div>
-            <a href="#" class="font-semibold">Order #145712</a>
+            <a href="/#/Orders/145712" class="font-semibold">Order #145712</a>
           </div>
         </div>
       </td>
