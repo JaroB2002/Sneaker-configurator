@@ -76,7 +76,7 @@
         </div>
       </div>          
           <!-- Link to "/#/Orders/" with text "Go back" -->
-          <h3><a href="/#/Orders/">Go back</a></h3>
+          <router-link to="/Orders">Go back</router-link>
 
     </div>
   </div>
