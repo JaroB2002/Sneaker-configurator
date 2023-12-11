@@ -37,55 +37,150 @@
     };
 </script>
 <template>
-    <div class="relative md:h-screen flex overflow-hidden">
-        <div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center flex-auto min-w-0 bg-white md:my-0 my-8">
-            <div class="md:flex md:items-center md:justify-center w-full md:h-full sm:rounded-lg md:rounded-none bg-white px-6">
-                <div class="max-w-md w-full mx-auto">
-                    <div>
-                        <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign up</h2>
-                        <p class="mt-2 text-center text-sm text-gray-600"> of log in met je <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500">account</a>.</p>
-                    </div>
-                    <div class="mt-8 space-y-6">
-                        <div  class=" alert hidden bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-900 px-4 py-3 shadow-md">
-                            Here is some feedback
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="email" class="sr-only">Email</label>
-                                <input  id="email"  v-model="email" name="email" type="text" autocomplete="email" required class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
-                            </div>
-                            <div>
-                                <label for="password" class="sr-only">Wachtwoord</label>
-                                <input v-model="password" id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                <label for="remember-me" class="ml-2 block text-sm text-gray-900">Onthoud mijn gegevens</label>
-                            </div>
-                            <div class="text-sm">
-                                <a href="reset_password.php" class="font-medium text-indigo-600 hover:text-indigo-500">Wachtwoord vergeten?</a>
-                            </div>
-                        </div>
-                        <div>
-                            <button  @click="signUp" type="submit" class="group relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
-                                    </svg>
-                                </span> Registreer
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="app">
+        <h2 class="title">Create an account</h2>
+        <div class="alert hidden">
+            Here is some feedback
         </div>
-        <div class="sm:w-2/4 md:flex">
-            <img class="w-full object-cover" src="https://images.pexels.com/photos/3182750/pexels-photo-3182750.jpeg" alt="">
+        <div class="signup">
+            <div>
+            <label for="email">Email</label>
+            <input type="text" class="input--text" name="email" id="email" v-model="email">
+            </div>
+            
+            <div>
+            <label for="password">Password</label>
+            <input type="password" class="input--text" name="password" id="password" v-model="password">
+            </div>
+            
+            <button @click="signUp" class="btn btn--primary">Sign up</button>
         </div>
     </div>
 </template>
 
 <style scoped>
+* {box-sizing: border-box;}
+html { height: 100%; display: flex; }
+
+body
+{
+  font-family: Helvetica, sans-serif;
+  background-color: #DDDDDD;
+  margin: auto;
+}
+
+.input--text::placeholder
+{
+  color: #ccc;
+}
+
+.input--text
+{
+  font-size: 1em;
+  width: 100%;
+  padding: 0.4em;
+  color: #000;
+  margin-bottom: 1em;
+}
+
+.app
+{
+  background-color: white;
+  width: 400px;
+  box-shadow: 0px 0px 1em #ccc;
+  font-size: 1.25em;
+  padding: 1em;
+}
+.todo
+{
+  border-top: 1px solid #ddd;
+  color: #F94D35;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.8em;
+}
+
+.todo__delete
+{
+  margin-left: auto;
+  color: blue;
+}
+
+.todo__delete:active
+{
+  color: red;
+}
+
+.todo__state
+{
+  margin-right: 0.5em;  
+}
+
+.todo--completed
+{
+  color: #fcb3a8;
+}
+
+.todo--completed .todo__text
+{
+  display: inline-block;
+  position: relative;
+}
+
+.todo--completed .todo__state
+{
+  visibility: hidden;
+}
+
+.todo--completed .todo__state::before
+{
+  content: "✔";
+  visibility: visible;  
+  color: red;
+  position: relative;
+  top: -0.2em;
+}
+
+.todo--completed .todo__text::before
+{
+  content: " ";
+  display: block;
+  position: absolute;
+  height: 0.1em;
+  width: 100%;
+  margin-top: calc(1em / 2 - 2px);
+  border-bottom: 3px solid #F94D35;
+}
+
+.btn
+{
+  font-size: 1em;
+  padding: 0.5em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  border: none;
+  color: white;
+  background-color: #F94D35;
+  cursor: pointer;
+}
+
+.btn:active
+{
+  position: relative;
+  top: 1px;
+}
+
+.hidden
+{
+  display:none;
+}
+
+.alert
+{
+  background-color: #B4C4E7;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  color: #32549d;
+}
 </style>
