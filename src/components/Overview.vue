@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-const orderCount = ref(2);
+const ordersCount = ref(0);
 //count users
 const usersCount = ref(0);
 //fetch users
@@ -16,8 +16,20 @@ onMounted(async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log('Success:', data);
     usersCount.value = data.data.users.length;
+
+    //Fetch orders
+    const ordersResponse = await fetch('http://localhost:3000/api/v1/shoes', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (!ordersResponse.ok) {
+      throw new Error(`HTTP error! status: ${ordersResponse.status}`);
+    }
+    const ordersData = await ordersResponse.json();
+    console.log(ordersData)
+    ordersCount.value = ordersData.data.shoes.length;
   } catch (error) {
     console.error('Failed to fetch users:', error);
   }
@@ -114,7 +126,7 @@ onMounted(async () => {
 
               <div class="mx-5">
                 <h4 class="text-2xl font-semibold text-1C1B1F">
-                  {{ orderCount }}
+                  {{ ordersCount }}
                 </h4>
                 <div class="text-1C1B1F">Total Orders</div>
               </div>
