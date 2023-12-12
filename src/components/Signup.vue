@@ -88,11 +88,11 @@ const showFeedback = (message) => {
         </div>
   
         <button
-          @click="signUp"
-          class="btn btn--primary bg-green-500 text-white font-bold p-4 rounded-none cursor-pointer hover:bg-#4AD22E w-full"
-        >
-          Sign up
-        </button>
+  @click="signUp"
+  class="btn btn--primary bg-green-500 text-white font-bold p-4 rounded-none cursor-pointer transition-all duration-300 ease-in-out hover:bg-#4AD22E hover:shadow-md w-full"
+>
+  Sign up
+</button>
   
         <!-- Link to Login -->
         <div class="mt-4 text-center text-sm text-gray-700">
