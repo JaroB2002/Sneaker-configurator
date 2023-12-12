@@ -3,14 +3,16 @@ import { ref, onMounted } from "vue";
 const ordersCount = ref(0);
 //count users
 const usersCount = ref(0);
+
+const shoes = ref([]);
 //fetch users
 onMounted(async () => {
   try {
-    const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:3000/users', {
+    const token = localStorage.getItem("token");
+    const response = await fetch("http://localhost:3000/users", {
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -19,19 +21,20 @@ onMounted(async () => {
     usersCount.value = data.data.users.length;
 
     //Fetch orders
-    const ordersResponse = await fetch('http://localhost:3000/api/v1/shoes', {
+    const ordersResponse = await fetch("http://localhost:3000/api/v1/shoes", {
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     if (!ordersResponse.ok) {
       throw new Error(`HTTP error! status: ${ordersResponse.status}`);
     }
     const ordersData = await ordersResponse.json();
-    console.log(ordersData)
+    console.log(ordersData);
     ordersCount.value = ordersData.data.shoes.length;
+    shoes.value = ordersData.data.shoes;
   } catch (error) {
-    console.error('Failed to fetch users:', error);
+    console.error("Failed to fetch users:", error);
   }
 });
 </script>
@@ -132,63 +135,29 @@ onMounted(async () => {
               </div>
             </div>
           </div>
-        </div>
-
+        </div>         
         <div class="w-full max-w-full">
           <table class="w-full" style="table-layout: fixed">
-            <tr class="text-gray-700 dark:text-gray-400">
-              <td class="px-8 py-4">
-                <div class="flex items-center text-sm">
-                  <div>
-                    <a href="/#/Orders/456789" class="font-semibold"
-                      >Order #456789</a
-                    >
-                  </div>
-                </div>
-              </td>
-              <td class="px-8 py-4 text-sm">€ 863.45</td>
-              <td class="px-8 py-4 text-xs relative">
-                <div x-data="{ open: false }">
-                  <button
-                    @click="open = !open"
-                    type="button"
-                    class="inline-flex items-center justify-between px-3 py-1 font-semibold leading-tight text-slate-800 bg-green-100 dark:bg-green-700 dark:text-green-100 focus:outline-none"
-                  >
-                    Verzonden
-
-                    <svg
-                      class="w-4 h-4 ml-2 -mr-1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.293 6.293a1 1 0 011.414 0L10 9.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </button>
-
-                  <!-- <div x-show="closed" @click.away="open = false"
-                    class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg">
-                    <div class="rounded-md bg-white shadow-xs">
-                      <div class="py-1">
-                        <a href="#"
-                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Verzonden</a>
-                        <a href="#"
-                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">In
-                          productie</a>
-                        <a href="#"
-                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Geannuleerd</a>
-                      </div>
-                    </div>
-                  </div> -->
-                </div>
-              </td>
-              <td class="px-8 py-4 text-sm">12/01/2023</td>
-              <td class="px-8 py-4">
-                <div class="flex items-center space-x-4 text-sm">
+            <thead>
+              <tr class="text-gray-700 dark:text-gray-400">
+                <th class="px-8 py-4 font-semibold">Order ID</th>
+                <th class="px-8 py-4">Price</th>
+                <th class="px-8 py-4">Status</th>
+                <th class="px-8 py-4">Datum</th>
+                <!-- Voeg andere gewenste kolommen toe -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(shoe, index) in shoes"
+                :key="index"
+                class="text-gray-700 dark:text-gray-400"
+              >
+                <td class="px-8 py-4">ORDER#{{ shoe._id }}</td>
+                <td class="px-8 py-4">{{ shoe.price }}</td>
+                <td class="px-8 py-4" ><span class="px-3 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 dark:text-white dark:bg-orange-600">{{ shoe.status }}</span></td>
+                <td class="px-8 py-4">{{ shoe.date }}</td>
+                <td><div class="flex items-center space-x-4 text-sm">
                   <button
                     class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-69FF47 dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="View"
@@ -206,56 +175,13 @@ onMounted(async () => {
                       />
                     </svg>
                   </button>
-                </div>
-              </td>
-            </tr>
+                </div></td>
+                <!-- Voeg andere gewenste kolommen toe -->
+              </tr>
+            </tbody>
           </table>
         </div>
 
-        <div class="w-full max-w-full">
-          <table class="w-full" style="table-layout: fixed">
-            <tr class="text-gray-700 dark:text-gray-400">
-              <td class="px-8 py-3">
-                <div class="flex items-center text-sm">
-                  <div>
-                    <a href="/#/Orders/987123" class="font-semibold"
-                      >Order #987123</a
-                    >
-                  </div>
-                </div>
-              </td>
-              <td class="px-8 py-3 text-sm">€ 369.95</td>
-              <td class="px-8 py-3 text-xs">
-                <span
-                  class="px-3 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 dark:text-white dark:bg-orange-600"
-                  >In productie</span
-                >
-              </td>
-              <td class="px-8 py-3 text-sm">12/01/2023</td>
-              <td class="px-8 py-3">
-                <div class="flex items-center space-x-4 text-sm">
-                  <button
-                    class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-69FF47 dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                    aria-label="View"
-                    @click.stop
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="#69FF47"
-                    >
-                      <path
-                        d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
       </div>
     </div>
 
