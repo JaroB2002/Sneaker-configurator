@@ -1,15 +1,32 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
-const order = ref({
-  id: 1,
-  date: '2023-12-01',
-  product: 'Example Product',
-  quantity: 2,
-  totalPrice: 50.0,
-  status: 'pending',
-});
+const order = ref({});
+const route = useRoute();
+const router = useRouter();
+
+const fetchOrder = async () => {
+  const id = route.params.id;
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch("https://sneaker-api-4zoy.onrender.com/api/v1/shoes/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }});
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    order.value = data.data.shoe;
+  } catch (error) {
+    console.error(error);
+    // Redirect to error page or show error message
+    router.push('/error');
+  }
+};
+console.log(order)
+onMounted(fetchOrder);
 
 const statusClass = computed(() => {
   return {
@@ -48,24 +65,24 @@ const confirmRemoveOrder = () => {
       <div class="mb-4">
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Order ID:</span>
-          <span class="font-bold text-gray-800">#56565656</span>
+          <span class="font-bold text-gray-800">{{ order._id }}</span>
         </div>
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Date:</span>
-          <span class="font-bold text-gray-800">10/12/2023</span>
+          <span class="font-bold text-gray-800">{{ new Date(order.date).toLocaleDateString() }}</span>
         </div>
         <div class="flex justify-between mb-2">
-          <span class="text-gray-700">Product:</span>
-          <span class="font-bold text-gray-800">Sneakers S43</span>
+          <span class="text-gray-700">Shoe Name:</span>
+          <span class="font-bold text-gray-800">{{ order.name }}</span>
         </div>
         <div class="flex justify-between mb-2">
-          <span class="text-gray-700">Quantity:</span>
-          <span class="font-bold text-gray-800">3</span>
+          <span class="text-gray-700">Size:</span>
+          <span class="font-bold text-gray-800">{{ order.size }}</span>
         </div>
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Total Price:</span>
-          <span v-if="order.totalPrice !== undefined" class="font-bold text-green-500">
-            €73
+          <span v-if="order.price !== undefined" class="font-bold text-green-500">
+            €{{ order.price.toFixed(2) }}
           </span>
         </div>
         <div class="flex justify-between mb-4">
@@ -75,7 +92,7 @@ const confirmRemoveOrder = () => {
       </div>
       <div class="mb-4">
         <div class="flex items-center justify-between mb-4">
-          <label for="status" class="block text-sm font-medium text-gray-700" :id="statusLabelId">
+          <label for="status" class="block text-sm font-medium text-gray-700">
             Change Status:
           </label>
           <select
