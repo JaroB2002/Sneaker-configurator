@@ -96,17 +96,20 @@ const showFeedback = (message) => {
   
         <!-- Link to Login -->
         <div class="mt-4 text-center text-sm text-gray-700">
-          Already have an account? <router-link to="/" class="text-white-500">Login</router-link>
-        </div>
+  Already have an account? <router-link to="/" class="text-white-500 font-bold hover:underline">Login</router-link>
+</div>
+
       </div>
     </div>
   </template>
   
   
-
   <style scoped>
     .input--text {
     border-color: #69FF47; /* Border color for text fields */
+  }
+  .btn--primary {
+    background-color: #69FF47; /* Background color for the login button */
   }
   .area {
     background: #1C1B1F;
@@ -224,6 +227,4 @@ const showFeedback = (message) => {
       border-radius: 15%;
     }
   }
-
-  
 </style>
