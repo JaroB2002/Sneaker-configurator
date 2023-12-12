@@ -1,3 +1,44 @@
+<script setup>
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+
+const order = ref({
+  id: 1,
+  date: '2023-12-01',
+  product: 'Example Product',
+  quantity: 2,
+  totalPrice: 50.0,
+  status: 'pending',
+});
+
+const statusClass = computed(() => {
+  return {
+    'text-green-500': order.value.status === 'accepted',
+    'text-yellow-500': order.value.status === 'pending',
+    'text-red-500': order.value.status === 'denied',
+  };
+});
+
+const removeOrder = () => {
+  // Check if order.value is defined before accessing its properties
+  if (order.value) {
+    // Implement logic to remove the order from the system
+    // For demonstration purposes, we'll just log a message here
+    console.log('Order deleted:', order.value.id);
+
+    // Reset the order to an empty object
+    order.value = {};
+  }
+};
+
+const confirmRemoveOrder = () => {
+  // Implement a confirmation dialog before removing the order
+  const confirmMessage = "Are you sure you want to remove this order?";
+  if (confirm(confirmMessage)) {
+    removeOrder();
+  }
+};
+</script>
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
     <div class="w-full max-w-md p-6 bg-white rounded-md shadow-md">
@@ -61,45 +102,4 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
-
-const order = ref({
-  id: 1,
-  date: '2023-12-01',
-  product: 'Example Product',
-  quantity: 2,
-  totalPrice: 50.0,
-  status: 'pending',
-});
-
-const statusClass = computed(() => {
-  return {
-    'text-green-500': order.value.status === 'accepted',
-    'text-yellow-500': order.value.status === 'pending',
-    'text-red-500': order.value.status === 'denied',
-  };
-});
-
-const removeOrder = () => {
-  // Check if order.value is defined before accessing its properties
-  if (order.value) {
-    // Implement logic to remove the order from the system
-    // For demonstration purposes, we'll just log a message here
-    console.log('Order deleted:', order.value.id);
-
-    // Reset the order to an empty object
-    order.value = {};
-  }
-};
-
-const confirmRemoveOrder = () => {
-  // Implement a confirmation dialog before removing the order
-  const confirmMessage = "Are you sure you want to remove this order?";
-  if (confirm(confirmMessage)) {
-    removeOrder();
-  }
-};
-</script>
+<style scoped></style>
