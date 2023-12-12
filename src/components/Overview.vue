@@ -156,7 +156,7 @@ onMounted(async () => {
                 <td class="px-8 py-4">ORDER#{{ shoe._id }}</td>
                 <td class="px-8 py-4">{{ shoe.price }}</td>
                 <td class="px-8 py-4" ><span class="px-3 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 dark:text-white dark:bg-orange-600">{{ shoe.status }}</span></td>
-                <td class="px-8 py-4">{{ shoe.date }}</td>
+                <td class="px-8 py-4">{{ new Date(shoe.date).toLocaleDateString() }}</td>
                 <td><div class="flex items-center space-x-4 text-sm">
                   <button
                     class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-69FF47 dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
