@@ -28,7 +28,7 @@ const logIn = async () => {
       let token = json.data.token;
       localStorage.setItem('token', token);
       
-      // Doorverwijzing naar de "orders"-pagina met de Vue-router
+      // Redirect to the "orders" page using Vue-router
       router.push('/orders');
     } else {
       let feedback = document.querySelector('.alert');
@@ -44,14 +44,14 @@ const logIn = async () => {
 <template>
   <div class="flex items-center justify-center h-screen bg-gray-100">
     <div class="bg-white p-8 rounded shadow-md w-96">
-      <h2 class="text-2xl font-semibold mb-6">Log in with your account</h2>
+      <h2 class="text-3xl font-bold mb-6 text-blue-700">Log in with your account</h2>
 
-      <div class="alert hidden bg-blue-200 p-2 mb-4 text-blue-700">
+      <div class="alert hidden bg-blue-200 p-2 mb-4 text-blue-700 font-bold">
         Here is some feedback
       </div>
 
       <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+        <label for="email" class="block text-sm font-bold text-gray-600">Email</label>
         <input
           type="text"
           class="input--text w-full p-2 border rounded focus:outline-none focus:border-blue-500"
@@ -62,7 +62,7 @@ const logIn = async () => {
       </div>
 
       <div class="mb-4">
-        <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+        <label for="password" class="block text-sm font-bold text-gray-600">Password</label>
         <input
           type="password"
           class="input--text w-full p-2 border rounded focus:outline-none focus:border-blue-500"
@@ -74,10 +74,32 @@ const logIn = async () => {
 
       <button
         @click="logIn"
-        class="btn btn--primary bg-blue-500 text-white font-bold p-2 rounded-full cursor-pointer"
+        class="btn btn--primary bg-blue-500 text-white font-bold p-2 rounded-full cursor-pointer hover:bg-#4AD22E"
       >
         Log in
       </button>
     </div>
   </div>
 </template>
+
+<style scoped>
+  .flex {
+    background-color: #F5F5F5; /* Background color */
+  }
+
+  .bg-white {
+    background-color: #F5F5F5; /* Background color */
+  }
+
+  .text-blue-700 {
+    color: #1C1B1F; /* Text color for feedback */
+  }
+
+  .input--text {
+    border-color: #69FF47; /* Border color for text fields */
+  }
+
+  .btn--primary {
+    background-color: #69FF47; /* Background color for the login button */
+  }
+</style>
