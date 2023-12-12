@@ -54,7 +54,7 @@ const logIn = async () => {
         <label for="email" class="block text-sm font-bold text-gray-600">Email</label>
         <input
           type="text"
-          class="input--text w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+          class="input--text w-full p-2 border rounded-none focus:outline-none focus:border-blue-500"
           name="email"
           id="email"
           v-model="email"
@@ -65,7 +65,7 @@ const logIn = async () => {
         <label for="password" class="block text-sm font-bold text-gray-600">Password</label>
         <input
           type="password"
-          class="input--text w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+          class="input--text w-full p-2 border rounded-none focus:outline-none focus:border-blue-500"
           name="password"
           id="password"
           v-model="password"
@@ -74,7 +74,7 @@ const logIn = async () => {
 
       <button
         @click="logIn"
-        class="btn btn--primary bg-blue-500 text-white font-bold p-2 rounded-full cursor-pointer hover:bg-#4AD22E"
+        class="btn btn--primary bg-blue-500 text-white font-bold p-2 rounded-none cursor-pointer hover:bg-#4AD22E w-full"
       >
         Log in
       </button>
