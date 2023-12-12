@@ -8,7 +8,7 @@ const shoes = ref([]);
 onMounted(async () => {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch("http://localhost:3000/users", {
+    const response = await fetch("https://sneaker-api-4zoy.onrender.com/users", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -19,7 +19,7 @@ onMounted(async () => {
     const data = await response.json();
     usersCount.value = data.data.users.length;
     //Fetch orders
-    const ordersResponse = await fetch("http://localhost:3000/api/v1/shoes", {
+    const ordersResponse = await fetch("https://sneaker-api-4zoy.onrender.com/api/v1/shoes", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
