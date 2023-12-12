@@ -108,12 +108,12 @@ onMounted(async () => {
           <h1 class="w-full text-4xl font-bold mb-10 pt-10 text-left pl-10">Order overview</h1>
           <table class="w-4/5 bg-white shadow-md rounded-lg overflow-hidden mx-auto" style="table-layout: fixed">
             <thead class="bg-gray-800 text-white">
-              <tr class="text-gray-700 dark:text-gray-400">
-                <th class="px-8 py-4 font-semibold  text-center">Order ID</th>
-                <th class="px-8 py-4  text-center">Price</th>
+              <tr class="text-green-500 dark:text-green-500" style="color: #69FF47;">
+                <th class="px-8 py-4 font-semibold text-center">Order ID</th>
+                <th class="px-8 py-4 text-center">Price</th>
                 <th class="px-8 py-4 text-center">Status</th>
-                <th class="px-8 py-4  text-center">Date</th>
-                <th class="px-8 py-4  text-center"></th>
+                <th class="px-8 py-4 text-center">Date</th>
+                <th class="px-8 py-4 text-center">Actions</th>
                 <!-- Voeg andere gewenste kolommen toe -->
               </tr>
             </thead>
