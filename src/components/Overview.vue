@@ -106,10 +106,10 @@ onMounted(async () => {
 
         <div class="flex flex-col items-center justify-flex-start min-h-screen bg-gray-100 text-gray-800">
           <h1 class="w-full text-4xl font-bold mb-10 pt-10 text-left pl-10">Order overview</h1>
-          <table class="w-4/5 bg-white shadow-md rounded-lg overflow-hidden mx-auto" style="table-layout: fixed">
+          <table class="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mx-auto" style="table-layout: fixed">
             <thead class="bg-gray-800 text-white">
               <tr class="text-green-500 dark:text-green-500" style="color: #69FF47;">
-                <th class="px-8 py-4 font-semibold text-center">Order ID</th>
+                <th class="px-8 py-4 space-x-4 font-semibold text-center">Order ID</th>
                 <th class="px-8 py-4 text-center">Price</th>
                 <th class="px-8 py-4 text-center">Status</th>
                 <th class="px-8 py-4 text-center">Date</th>
@@ -119,7 +119,7 @@ onMounted(async () => {
             </thead>
             <tbody>
               <tr v-for="(shoe, index) in shoes" :key="index" class="text-gray-700 dark:text-gray-400">
-                <td class="px-8 py-4  text-center">ORDER#{{ shoe._id }}</td>
+                <td class="px-8 py-4  space-x-4 text-center">ORDER#{{ shoe._id }}</td>
                 <td class="px-8 py-4  text-center">{{ shoe.price }} €</td>
                 <td class="px-8 py-4  text-center">
                   <span
@@ -131,7 +131,7 @@ onMounted(async () => {
                   {{ new Date(shoe.date).toLocaleDateString() }}
                 </td>
                 <td class="px-8 py-4 text-center">
-                  <div class="flex items-center space-x-4 text-sm">
+                  <div class="flex items-center justify-center space-x-4 text-sm">
                     <router-link :to="`/orders/${shoe._id}`">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#69FF47">
                         <path
