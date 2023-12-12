@@ -105,6 +105,9 @@ const showFeedback = (message) => {
   
 
   <style scoped>
+    .input--text {
+    border-color: #69FF47; /* Border color for text fields */
+  }
   .area {
     background: #1C1B1F;
     width: 100%;
@@ -221,5 +224,6 @@ const showFeedback = (message) => {
       border-radius: 15%;
     }
   }
-</style>
 
+  
+</style>
