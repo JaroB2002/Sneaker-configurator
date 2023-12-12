@@ -60,12 +60,12 @@ const confirmRemoveOrder = () => {
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
     <div class="w-full max-w-md p-6 bg-white rounded-md shadow-md">
       <div class="text-center">
-        <h1 class="text-3xl font-bold text-green-500 mb-4">Order Details</h1>
+        <h1 class="text-3xl font-bold text-black mb-4">Order Details</h1>
       </div>
       <div class="mb-4">
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Order ID:</span>
-          <span class="font-bold text-gray-800">{{ order._id }}</span>
+          <span class="font-bold text-green-500">{{ order._id }}</span>
         </div>
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Date:</span>
@@ -81,7 +81,7 @@ const confirmRemoveOrder = () => {
         </div>
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Total Price:</span>
-          <span v-if="order.price !== undefined" class="font-bold text-green-500">
+          <span v-if="order.price !== undefined" class="font-bold">
             €{{ order.price.toFixed(2) }}
           </span>
         </div>
@@ -107,14 +107,14 @@ const confirmRemoveOrder = () => {
           </select>
         </div>
       </div>
-      <div class="text-center">
+      <div class="flex justify-center space-x-4">
         <!-- Single button with confirmation dialog -->
         <button @click="confirmRemoveOrder" class="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600">
           Remove Order
         </button>
 
         <!-- Link to "/#/Orders/" with text "Go back" -->
-        <router-link to="/Orders" class="text-blue-500">Go back</router-link>
+        <router-link to="/orders" class="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 inline-block text-center">Go back</router-link>
       </div>
     </div>
   </div>
