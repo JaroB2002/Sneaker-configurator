@@ -90,16 +90,16 @@ const showFeedback = (message) => {
       </div>
 
       <button
-        @click="logIn"
-        class="btn btn--primary bg-blue-500 text-white font-bold p-4 rounded-none cursor-pointer hover:bg-#4AD22E w-full"
-      >
-        Log in
-      </button>
+  @click="logIn"
+  class="btn btn--primary bg-blue-500 text-white font-bold p-4 rounded-none cursor-pointer transition-all duration-300 ease-in-out hover:bg-#4AD22E hover:shadow-md w-full"
+>
+  Log in
+</button>
 
       <!-- Link to Signup -->
       <div class="mt-4 text-center text-sm text-gray-700">
-        Don't have an account? <router-link to="/signup" class="text-white-500">Sign up</router-link>
-      </div>
+  Don't have an account? <router-link to="/signup" class="text-white-500 font-bold hover:underline">Sign up</router-link>
+</div>
     </div>
   </div>
 </template>
