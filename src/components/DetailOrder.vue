@@ -87,11 +87,11 @@ const confirmRemoveOrder = () => {
           <span class="text-gray-700">Order ID:</span>
           <span class="font-bold text-green-500">{{ order._id }}</span>
         </div>
-        <div class="flex justify-between mb-2">
+        <div class="flex justify-between mb-2" v-if="order.user">
           <span class="text-gray-700">Client:</span>
           <span class="font-bold text-green-500">{{ order.user.username }}</span>
         </div>
-         <div class="flex justify-between mb-2">
+         <div class="flex justify-between mb-2" v-if="order.user">
           <span class="text-gray-700">Email:</span>
           <a :href="'mailto:' + order.email" class="font-bold text-blue-500">{{ order.user.email }}</a>
         </div>
