@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import {useRouter} from "vue-router";
 
 
@@ -9,7 +9,12 @@ const ordersCount = ref(0);
 //count users
 const usersCount = ref(0);
 const shoes = ref([]);
-
+const searchQuery = ref("");
+const filteredShoes = computed(() => {
+  return shoes.value.filter((shoe) => {
+    return shoe._id.toLowerCase().includes(searchQuery.value.toLowerCase());
+  });
+});
 //fetch users
 onMounted(async () => {
   const token = localStorage.getItem("token");
@@ -124,7 +129,14 @@ const logout = () => {
         <!-- Order table -->
 
         <div class="flex flex-col items-center justify-flex-start min-h-screen bg-gray-100 text-gray-800">
+          
           <h1 class="w-full text-4xl font-bold mb-10 pt-10 text-left pl-10">Order overview</h1>
+          <input
+            v-model="searchQuery"
+            type="text"
+            class="w-11/12 p-2 border border-gray-300 rounded-md"
+            placeholder="Search order..."
+          />
           <table class="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mx-auto" style="table-layout: fixed">
             <thead class="bg-gray-800 text-white">
               <tr class="text-green-500 dark:text-green-500" style="color: #69FF47;">
@@ -137,8 +149,9 @@ const logout = () => {
                 <!-- Voeg andere gewenste kolommen toe -->
               </tr>
             </thead>
+            
             <tbody>
-              <tr v-for="(shoe, index) in shoes" :key="index" class="text-gray-700 dark:text-gray-400">
+              <tr v-for="(shoe, index) in filteredShoes" :key="index" class="text-gray-700 dark:text-gray-400">
                 <td class="px-8 py-4  space-x-4 text-center">ORDER#{{ shoe._id }}</td>
                 <td class="px-8 py-4  text-center">{{ shoe.price }} €</td>
                 <td class="px-8 py-4  text-center">
