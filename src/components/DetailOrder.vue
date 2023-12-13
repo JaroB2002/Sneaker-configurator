@@ -36,15 +36,35 @@ const statusClass = computed(() => {
   };
 });
 
-const removeOrder = () => {
-  // Check if order.value is defined before accessing its properties
+const removeOrder = async() => {
   if (order.value) {
-    // Implement logic to remove the order from the system
-    // For demonstration purposes, we'll just log a message here
-    console.log('Order deleted:', order.value.id);
+    const id = order.value._id;
+    console.log(id)
+    try {
+      // Send a DELETE request to the API endpoint
+      const token = localStorage.getItem("token");
+      const response = await fetch(`https://sneaker-api-4zoy.onrender.com/api/v1/shoes/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    // Reset the order to an empty object
-    order.value = {};
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // If the request was successful, log a message and reset the order
+      console.log('Order deleted:', id);
+      order.value = {};
+
+      // Redirect to the orders page
+      router.push('/orders');
+    } catch (error) {
+      console.error(error);
+      // Redirect to error page or show error message
+      router.push('/error');
+    }
   }
 };
 

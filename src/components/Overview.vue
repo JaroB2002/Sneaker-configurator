@@ -1,14 +1,14 @@
 <script setup>
+
 import { ref, onMounted, computed } from "vue";
 import {useRouter} from "vue-router";
 
-
 const router = useRouter();
-
 const ordersCount = ref(0);
 //count users
 const usersCount = ref(0);
 const shoes = ref([]);
+
 const searchQuery = ref("");
 const filteredShoes = computed(() => {
   return shoes.value.filter((shoe) => {
