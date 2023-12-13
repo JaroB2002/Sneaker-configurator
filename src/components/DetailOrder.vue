@@ -67,6 +67,14 @@ const confirmRemoveOrder = () => {
           <span class="text-gray-700">Order ID:</span>
           <span class="font-bold text-green-500">{{ order._id }}</span>
         </div>
+         <div class="flex justify-between mb-2">
+          <span class="text-gray-700">Email:</span>
+          <a :href="'mailto:' + order.email" class="font-bold text-blue-500">{{ order.email }}</a>
+        </div>
+        <div class="flex justify-between mb-2">
+          <span class="text-gray-700">Phone Number:</span>
+          <a :href="'tel:' + order.phoneNumber" class="font-bold text-blue-500">{{ order.phoneNumber }}</a>
+        </div>
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Date:</span>
           <span class="font-bold text-gray-800">{{ new Date(order.date).toLocaleDateString() }}</span>

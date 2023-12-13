@@ -4,6 +4,7 @@ import {useRouter} from "vue-router";
 
 
 const router = useRouter();
+
 const ordersCount = ref(0);
 //count users
 const usersCount = ref(0);
@@ -44,6 +45,12 @@ onMounted(async () => {
     console.error("Failed to fetch users:", error);
   }
 });
+const logout = () => {
+  localStorage.removeItem("token");
+
+  // Vernieuw de pagina (navigeer naar de loginpagina)
+  window.location.href = "/#/"; // Pas "/login" aan aan de werkelijke route van je loginpagina
+};
 </script>
 
 <template :class="{ 'theme-dark': dark }">
@@ -121,7 +128,8 @@ onMounted(async () => {
           <table class="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mx-auto" style="table-layout: fixed">
             <thead class="bg-gray-800 text-white">
               <tr class="text-green-500 dark:text-green-500" style="color: #69FF47;">
-                <th class="px-8 py-4 space-x-4 font-semibold text-center">Order ID</th>
+                <th class="px-8 py-4 space-x-4 font-semibo
+                ld text-center">Order ID</th>
                 <th class="px-8 py-4 text-center">Price</th>
                 <th class="px-8 py-4 text-center">Status</th>
                 <th class="px-8 py-4 text-center">Date</th>
@@ -158,72 +166,14 @@ onMounted(async () => {
           </table>
         </div>
       </div>
+          <!-- Log out -->
+    <div class="flex justify-end mt-8">
+      <button @click="logout" class="px-4 py-2 bg-red-500 text-white rounded-md">Log Out</button>
+    </div>
     </div>
 
-    <!-- Pagination -->
-    <div
-      class="grid px-12 py-4 text-sm font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-      <span class="flex items-center col-span-3">Showing 21-30 of 100</span>
-      <span class="col-span-2"></span>
-      <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-        <nav aria-label="Table navigation">
-          <ul class="inline-flex items-center">
-            <li>
-              <button class="px-4 py-2 focus:outline-none focus:shadow-outline-purple" aria-label="Previous">
-                <svg class="w-5 h-5 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                  <path
-                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                </svg>
-              </button>
-            </li>
-            <!-- Page buttons (adjust as needed) -->
-            <li>
-              <button class="px-4 py-2 focus:outline-none focus:shadow-outline-purple">
-                1
-              </button>
-            </li>
-            <li>
-              <button class="px-4 py-2 focus:outline-none focus:shadow-outline-purple">
-                2
-              </button>
-            </li>
-            <li>
-              <button
-                class="px-4 py-2 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 focus:outline-none focus:shadow-outline-purple">
-                3
-              </button>
-            </li>
-            <li>
-              <button class="px-4 py-2 focus:outline-none focus:shadow-outline-purple">
-                4
-              </button>
-            </li>
-            <li><span class="px-4 py-2">...</span></li>
-            <li>
-              <button class="px-4 py-2 focus:outline-none focus:shadow-outline-purple">
-                8
-              </button>
-            </li>
-            <li>
-              <button class="px-4 py-2 focus:outline-none focus:shadow-outline-purple">
-                9
-              </button>
-            </li>
-            <!-- End of page buttons -->
-            <li>
-              <button class="px-4 py-2 focus:outline-none focus:shadow-outline-purple" aria-label="Next">
-                <svg class="w-5 h-5 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                  <path
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                </svg>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </span>
-    </div>
+
+
   </main>
 </template>
 
