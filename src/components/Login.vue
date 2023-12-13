@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import {useStore} from 'vuex';
 
 const router = useRouter();
+const store = useStore();
 const email = ref('');
 const password = ref('');
 
@@ -25,6 +27,8 @@ const logIn = async () => {
       showFeedback("Successfully logged in");
       let token = json.data.token;
       localStorage.setItem('token', token);
+      store.commit('setToken', token);
+      console.log('Token in store:', store.state.token);
       router.push('/orders'); // Redirect to the home page
     } else {
       showFeedback("Failed to login");

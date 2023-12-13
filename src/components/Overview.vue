@@ -1,12 +1,21 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import {useRouter} from "vue-router";
+
+
+const router = useRouter();
 
 const ordersCount = ref(0);
 //count users
 const usersCount = ref(0);
 const shoes = ref([]);
+
 //fetch users
 onMounted(async () => {
+  const token = localStorage.getItem("token");
+  if(!token) {
+    router.push('/login');
+  }
   try {
     const token = localStorage.getItem("token");
     const response = await fetch("https://sneaker-api-4zoy.onrender.com/users", {
