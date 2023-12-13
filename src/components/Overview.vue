@@ -48,7 +48,7 @@ const logout = () => {
   localStorage.removeItem("token");
 
   // Vernieuw de pagina (navigeer naar de loginpagina)
-  window.location.href = "/login"; // Pas "/login" aan aan de werkelijke route van je loginpagina
+  window.location.href = "/#/"; // Pas "/login" aan aan de werkelijke route van je loginpagina
 };
 </script>
 
