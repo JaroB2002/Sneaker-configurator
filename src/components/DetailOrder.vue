@@ -9,23 +9,25 @@ const router = useRouter();
 const fetchOrder = async () => {
   const id = route.params.id;
   try {
-    const token = localStorage.getItem("token");
-    const response = await fetch("https://sneaker-api-4zoy.onrender.com/api/v1/shoes/" + id, {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`https://sneaker-api-4zoy.onrender.com/api/v1/shoes/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
-      }});
+      },
+    });
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+
     const data = await response.json();
     order.value = data.data.shoe;
   } catch (error) {
-    console.error(error);
-    // Redirect to error page or show error message
+    console.error('Error fetching order:', error);
     router.push('/error');
   }
 };
-console.log(order)
+
 onMounted(fetchOrder);
 
 const statusClass = computed(() => {
@@ -36,13 +38,11 @@ const statusClass = computed(() => {
   };
 });
 
-const removeOrder = async() => {
+const removeOrder = async () => {
   if (order.value) {
     const id = order.value._id;
-    console.log(id)
     try {
-      // Send a DELETE request to the API endpoint
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const response = await fetch(`https://sneaker-api-4zoy.onrender.com/api/v1/shoes/${id}`, {
         method: 'DELETE',
         headers: {
@@ -54,23 +54,18 @@ const removeOrder = async() => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // If the request was successful, log a message and reset the order
       console.log('Order deleted:', id);
       order.value = {};
-
-      // Redirect to the orders page
       router.push('/orders');
     } catch (error) {
-      console.error(error);
-      // Redirect to error page or show error message
+      console.error('Error removing order:', error);
       router.push('/error');
     }
   }
 };
 
 const confirmRemoveOrder = () => {
-  // Implement a confirmation dialog before removing the order
-  const confirmMessage = "Are you sure you want to remove this order?";
+  const confirmMessage = 'Are you sure you want to remove this order?';
   if (confirm(confirmMessage)) {
     removeOrder();
   }
@@ -87,15 +82,16 @@ const confirmRemoveOrder = () => {
           <span class="text-gray-700">Order ID:</span>
           <span class="font-bold text-green-500">{{ order._id }}</span>
         </div>
-        <div class="flex justify-between mb-2" v-if="order.user">
-          <span class="text-gray-700">Client:</span>
-          <span class="font-bold text-green-500">{{ order.user.username }}</span>
-        </div>
-         <div class="flex justify-between mb-2" v-if="order.user">
-          <span class="text-gray-700">Email:</span>
-          <a :href="'mailto:' + order.email" class="font-bold text-blue-500">{{ order.user.email }}</a>
-        </div>
-
+        <div class="mb-4" v-if="order.user">
+      <div class="flex justify-between mb-2">
+        <span class="text-gray-700">Client:</span>
+        <span class="font-bold text-green-500">{{ order.user.username }}</span>
+      </div>
+      <div class="flex justify-between mb-2">
+        <span class="text-gray-700">Email:</span>
+        <a :href="'mailto:' + order.email" class="font-bold text-blue-500">{{ order.user.email }}</a>
+      </div>
+    </div>
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Date:</span>
           <span class="font-bold text-gray-800">{{ new Date(order.date).toLocaleDateString() }}</span>
