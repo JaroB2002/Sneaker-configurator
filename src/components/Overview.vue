@@ -1,11 +1,10 @@
 <script setup>
 
 import { ref, onMounted, computed } from "vue";
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 const ordersCount = ref(0);
-//count users
 const usersCount = ref(0);
 const shoes = ref([]);
 
@@ -15,10 +14,10 @@ const filteredShoes = computed(() => {
     return shoe._id.toLowerCase().includes(searchQuery.value.toLowerCase());
   });
 });
-//fetch users
+
 onMounted(async () => {
   const token = localStorage.getItem("token");
-  if(!token) {
+  if (!token) {
     router.push('/login');
   }
   try {
@@ -33,7 +32,7 @@ onMounted(async () => {
     }
     const data = await response.json();
     usersCount.value = data.data.users.length;
-    //Fetch orders
+
     const ordersResponse = await fetch("https://sneaker-api-4zoy.onrender.com/api/v1/shoes", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -43,23 +42,53 @@ onMounted(async () => {
       throw new Error(`HTTP error! status: ${ordersResponse.status}`);
     }
     const ordersData = await ordersResponse.json();
-    console.log(ordersData);
     ordersCount.value = ordersData.data.shoes.length;
     shoes.value = ordersData.data.shoes;
   } catch (error) {
     console.error("Failed to fetch users:", error);
   }
 });
+
 const logout = () => {
   localStorage.removeItem("token");
-
-  // Vernieuw de pagina (navigeer naar de loginpagina)
-  window.location.href = "/#/"; // Pas "/login" aan aan de werkelijke route van je loginpagina
+  window.location.href = "/#/";
 };
+
+const sortOptions = ref({
+  field: 'date',
+  order: 'asc',
+});
+
+const changeSort = (field) => {
+  if (sortOptions.value.field === field) {
+    sortOptions.value.order = sortOptions.value.order === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortOptions.value.field = field;
+    sortOptions.value.order = 'asc';
+  }
+};
+
+const sortedShoes = computed(() => {
+  const sorted = [...filteredShoes.value];
+  const { field, order } = sortOptions.value;
+
+  return sorted.sort((a, b) => {
+    const aValue = a[field];
+    const bValue = b[field];
+
+    if (order === 'asc') {
+      return aValue > bValue ? 1 : -1;
+    } else {
+      return aValue < bValue ? 1 : -1;
+    }
+  });
+});
+
 </script>
 
+
 <template :class="{ 'theme-dark': dark }">
-  <main class="h-full pb-16 overflow-y-auto">
+ <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-6 mx-auto">
       <!-- With actions -->
       <div class="mt-4">
@@ -129,29 +158,38 @@ const logout = () => {
         <!-- Order table -->
 
         <div class="flex flex-col items-center justify-flex-start min-h-screen bg-gray-100 text-gray-800">
-          
-          <h1 class="w-full text-4xl font-bold mb-10 pt-10 text-left pl-10">Order overview</h1>
+        <h1 class="w-full text-4xl font-bold mb-10 pt-10 text-left pl-10">Order overview</h1>
           <input
-            v-model="searchQuery"
-            type="text"
-            class="w-11/12 p-2 border border-gray-300 rounded-md"
-            placeholder="Search order..."
-          />
+  v-model="searchQuery"
+  type="text"
+  class="w-11/12 p-2 border border-gray-300 rounded-md transition-all duration-300 focus:outline-none focus:border-green-500"
+  placeholder="Search order..."
+/>
           <table class="w-11/12 bg-white shadow-md rounded-lg overflow-hidden mx-auto" style="table-layout: fixed">
             <thead class="bg-gray-800 text-white">
-              <tr class="text-green-500 dark:text-green-500" style="color: #69FF47;">
-                <th class="px-8 py-4 space-x-4 font-semibo
-                ld text-center">Order ID</th>
-                <th class="px-8 py-4 text-center">Price</th>
-                <th class="px-8 py-4 text-center">Status</th>
-                <th class="px-8 py-4 text-center">Date</th>
-                <th class="px-8 py-4 text-center">Actions</th>
-                <!-- Voeg andere gewenste kolommen toe -->
-              </tr>
-            </thead>
+    <tr class="text-green-500 dark:text-green-500" style="color: #69FF47;">
+      <th @click="changeSort('date')" class="px-8 py-4 space-x-4 font-semibold text-center cursor-pointer">
+        Order ID
+        <span v-if="sortOptions.field === 'date'">&nbsp;{{ sortOptions.order === 'asc' ? '▲' : '▼' }}</span>
+      </th>
+      <th @click="changeSort('price')" class="px-8 py-4 text-center cursor-pointer">
+        Price
+        <span v-if="sortOptions.field === 'price'">&nbsp;{{ sortOptions.order === 'asc' ? '▲' : '▼' }}</span>
+      </th>
+      <th @click="changeSort('status')" class="px-8 py-4 text-center cursor-pointer">
+        Status
+        <span v-if="sortOptions.field === 'status'">&nbsp;{{ sortOptions.order === 'asc' ? '▲' : '▼' }}</span>
+      </th>
+      <th @click="changeSort('date')" class="px-8 py-4 text-center cursor-pointer">
+        Date
+        <span v-if="sortOptions.field === 'date'">&nbsp;{{ sortOptions.order === 'asc' ? '▲' : '▼' }}</span>
+      </th>
+      <th class="px-8 py-4 text-center">Actions</th>
+    </tr>
+  </thead>
             
             <tbody>
-              <tr v-for="(shoe, index) in filteredShoes" :key="index" class="text-gray-700 dark:text-gray-400">
+              <tr v-for="(shoe, index) in sortedShoes" :key="index" class="text-gray-700 dark:text-gray-400">
                 <td class="px-8 py-4  space-x-4 text-center">ORDER#{{ shoe._id }}</td>
                 <td class="px-8 py-4  text-center">{{ shoe.price }} €</td>
                 <td class="px-8 py-4  text-center">
