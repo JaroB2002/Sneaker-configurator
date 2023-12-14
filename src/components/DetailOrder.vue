@@ -31,7 +31,7 @@ onMounted(fetchOrder);
 const statusClass = computed(() => {
   return {
     'text-green-500': order.value.status === 'accepted',
-    'text-yellow-500': order.value.status === 'pending',
+    'text-yellow-500': order.value.status === 'in progress',
     'text-red-500': order.value.status === 'denied',
   };
 });
@@ -130,7 +130,7 @@ const confirmRemoveOrder = () => {
             aria-labelledby="statusLabelId"
             class="w-2/3 p-2 border rounded text-gray-800 focus:outline-none focus:border-green-500 focus:ring focus:ring-green-200"
           >
-            <option value="pending" class="text-yellow-500">Pending</option>
+            <option value="in progress" class="text-yellow-500">In progress</option>
             <option value="accepted">Accepted</option>
             <option value="denied" class="text-red-500">Denied</option>
           </select>
