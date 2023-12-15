@@ -8,6 +8,8 @@ const username = ref('');
 const oldPassword = ref('');
 const newPassword = ref('');
 const confirmPassword = ref('');
+const successMessage = ref('');
+
 
 const updatePassword = async()=>{
     try {
@@ -27,22 +29,27 @@ const updatePassword = async()=>{
         const json = await response.json();
     
         if (json.status === 'success') {
-        //showFeedback("Successfully logged in");
-        console.log("succes", json);
-        router.push('/'); // Redirect to the home page
-        } else {
-        //showFeedback("Failed to login");
-        console.log("Failed to login");
-        }
-    } catch (error) {
-        console.error('Error during login:', error);
+      successMessage.value = "Wachtwoord succesvol gewijzigd!";
+      console.log('Success message:', successMessage.value);
+
+      // Add a delay before navigation (e.g., 2 seconds)
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+    } else {
+      successMessage.value = '';
+      console.log("Failed to update password");
     }
+  } catch (error) {
+    console.error('Error during password update:', error);
+  }
 };
 </script>
 
 <template>
  <div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
     <h2 class="text-2xl font-semibold mb-6">Wachtwoord wijzigen</h2>
+    <div v-if="successMessage" class="mb-4 text-green-500 font-bold">{{ successMessage }}</div>
     <form @submit.prevent="updatePassword">
       <div class="mb-4">
         <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Gebruikersnaam:</label>
