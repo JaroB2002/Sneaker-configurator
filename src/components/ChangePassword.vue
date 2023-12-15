@@ -29,7 +29,7 @@ const updatePassword = async()=>{
         if (json.status === 'success') {
         //showFeedback("Successfully logged in");
         console.log("succes", json);
-        router.push('/login'); // Redirect to the home page
+        router.push('/'); // Redirect to the home page
         } else {
         //showFeedback("Failed to login");
         console.log("Failed to login");
