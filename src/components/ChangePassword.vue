@@ -11,7 +11,7 @@ const confirmPassword = ref('');
 
 const updatePassword = async()=>{
     try {
-        const response = await fetch('http://localhost:3000/admin/change-password', {
+        const response = await fetch('https://sneaker-api-4zoy.onrender.com/admin/change-password', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
