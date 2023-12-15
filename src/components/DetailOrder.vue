@@ -5,6 +5,11 @@ import { useRouter, useRoute } from 'vue-router';
 const order = ref({});
 const route = useRoute();
 const router = useRouter();
+//make a new Primus connection
+let primus = new Primus('https://sneaker-api-4zoy.onrender.com');
+
+primus.on('open', () => {
+  console.log('Connection is alive and kicking')});
 
 const fetchOrder = async () => {
   const id = route.params.id;
@@ -52,6 +57,9 @@ const removeOrder = async () => {
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      if(primus.readyState == Primus.OPEN){
+        primus.write(JSON.stringify({action: 'delete'}));
       }
 
       console.log('Order deleted:', id);
