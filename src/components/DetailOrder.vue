@@ -54,6 +54,10 @@ const updateOrderStatus = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
+    if(primus.readyState == Primus.OPEN){
+        primus.write(JSON.stringify({action: 'updateStatus', response: response}));
+      }
+
     console.log('Order updated:', id);
     router.push('/orders');
   } catch (error) {
