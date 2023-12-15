@@ -24,6 +24,7 @@ primus.on('data', (json) => {
   if(json.action == 'post'){
     //update the order counter
     shoes.value.push(json.data.shoe);
+    ordersCount.value = shoes.value.length;
   };
 
 });
