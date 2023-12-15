@@ -270,10 +270,11 @@ const sortedShoes = computed(() => {
 
             <tbody>
               <tr
-                v-for="(shoe, index) in sortedShoes"
-                :key="index"
-                class="text-gray-700 dark:text-gray-400"
-              >
+  v-for="(shoe, index) in sortedShoes"
+  :key="index"
+  class="text-gray-700 dark:text-gray-400 transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+>
+              
                 <td class="px-8 py-4 space-x-4 text-center">
                   ORDER#{{ shoe._id }}
                 </td>
