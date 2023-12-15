@@ -16,11 +16,9 @@ primus.on('open', () => {
 
 primus.on('data', (json) => {
   console.log('Received a new message from the server', json);
-  if(json.action == 'updateCount'){
+  if(json.action == 'update'){
     //update the order counter
     ordersCount.value = json.data.count;
-  }else if(json.action == "updateList"){
-    //update the order list
     shoes.value = json.data.shoes;
   };
 
@@ -61,12 +59,9 @@ onMounted(async () => {
     }
     const ordersData = await ordersResponse.json();
     ordersCount.value = ordersData.data.shoes.length;
-    if(primus.readyState == Primus.OPEN){
-      primus.write(JSON.stringify({action: 'updateCount', data: {ordersCount: ordersCount.value}}));
-    }
     shoes.value = ordersData.data.shoes;
     if(primus.readyState == Primus.OPEN){
-      primus.write(JSON.stringify({action: 'updateList', data: {shoes: shoes.value}}));
+      primus.write(JSON.stringify({action: 'update', data: {ordersCount: ordersCount.value, shoes: shoes.value}}));
     }
   } catch (error) {
     console.error("Failed to fetch users:", error);
