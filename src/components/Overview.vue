@@ -1,4 +1,5 @@
 <script setup>
+
 import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -118,7 +119,7 @@ const sortedShoes = computed(() => {
 </script>
 
 <template :class="{ 'theme-dark': dark }">
-  <main class="h-full pb-16 overflow-y-auto">
+ <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-6 mx-auto">
       <!-- With actions -->
       <div class="mt-4">
@@ -330,4 +331,34 @@ const sortedShoes = computed(() => {
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+  input {
+    width: 93%;
+    box-sizing: border-box;
+  }
+
+  table {
+    width: 93%;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 640px) {
+    /* Responsive styling for small screens (mobile) */
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    th, td {
+      min-width: 150px; /* Adjust as needed for your content */
+    }
+  }
+
+  @media (max-width: 768px) {
+    /* Responsive styling for medium screens (tablets) */
+    th, td {
+      min-width: 100px; /* Adjust as needed for your content */
+    }
+  }
+
+</style>
