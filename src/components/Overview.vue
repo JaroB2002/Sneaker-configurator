@@ -327,6 +327,9 @@ const sortedShoes = computed(() => {
           Log Out
         </button>
       </div>
+      <div class="mt-4 text-center text-sm text-gray-700">
+<router-link to="/change-password" class="text-white-500 font-bold hover:underline">Change password</router-link>
+</div>
     </div>
   </main>
 </template>
@@ -365,17 +368,6 @@ const sortedShoes = computed(() => {
     min-width: 100px; /* Adjust as needed for your content */
   }}
 
-  @media (min-width: 769px) and (max-width: 1024px) {
-  /* Responsive styling for screens between tablet and desktop */
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  th, td {
-    min-width: 150px; /* Adjust as needed for your content */
-  }
-}
 
   @media (max-width: 1024px) {
     /* Responsive styling for tablets */
