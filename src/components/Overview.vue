@@ -9,7 +9,7 @@ const usersCount = ref(0);
 const shoes = ref([]);
 
 //make a new Primus connection
-let primus = new Primus('http://localhost:3000');
+let primus = new Primus('https://sneaker-api-4zoy.onrender.com');
 
 primus.on('open', () => {
   console.log('Connection is alive and kicking')});
