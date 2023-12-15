@@ -13,6 +13,7 @@ import Login from './components/Login.vue'
 import Signup from './components/Signup.vue'
 import Overview from './components/Overview.vue'
 import DetailOrder from './components/DetailOrder.vue'
+import ChangePassword from './components/ChangePassword.vue'
 
 const store = createStore({
     state(){
@@ -32,6 +33,7 @@ const routes = [
     { path: '/orders', component: Overview, meta: {requiresAuth: true}},
     { path: '/orders/:id', component: DetailOrder, props: true}, // zowat de get variabele, een dynamische route aangezien je niet op voorhand weet wat id is
     { path: '/signup', component: Signup },
+    { path: '/change-password', component: ChangePassword, meta: {requiresAuth: true}}
 ]
 
 const router = VueRouter.createRouter({
