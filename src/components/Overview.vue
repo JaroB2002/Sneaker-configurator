@@ -8,6 +8,20 @@ const ordersCount = ref(0);
 const usersCount = ref(0);
 const shoes = ref([]);
 
+//make a new Primus connection
+let primus = new Primus('https://sneaker-api-4zoy.onrender.com');
+
+primus.on('open', () => {
+  console.log('Connection is alive and kicking')});
+
+primus.on('data', (json) => {
+  console.log('Received a new message from the server', json);
+  if(json.action == 'updateCount'){
+    ordersCount.value = json.data.count;
+  }
+
+});
+
 const searchQuery = ref("");
 const filteredShoes = computed(() => {
   return shoes.value.filter((shoe) => {
@@ -43,6 +57,9 @@ onMounted(async () => {
     }
     const ordersData = await ordersResponse.json();
     ordersCount.value = ordersData.data.shoes.length;
+    if(primus.readyState == Primus.OPEN){
+      primus.write(JSON.stringify({action: 'updateCount', data: {ordersCount: ordersCount.value}}));
+    }
     shoes.value = ordersData.data.shoes;
   } catch (error) {
     console.error("Failed to fetch users:", error);
