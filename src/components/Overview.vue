@@ -127,7 +127,7 @@ const sortedShoes = computed(() => {
           <!-- New Users Card -->
           <div class="w-full sm:w-1/2 xl:w-1/3">
             <div class="flex items-center p-6 bg-white shadow-sm rounded-lg">
-              <div class="p-3 bg-green-800 bg-opacity-75 rounded-full">
+              <div class="p-3 bg-green-400 bg-opacity-75 rounded-full">
                 <svg
                   class="w-8 h-8 text-white"
                   viewBox="0 0 28 30"
@@ -175,7 +175,7 @@ const sortedShoes = computed(() => {
             <div class="flex items-center p-6 bg-white shadow-sm rounded-lg">
               <div class="p-3 bg-green-400 bg-opacity-75 rounded-full">
                 <svg
-                  class="w-8 h-8 text-gray-900"
+                  class="w-8 h-8 text-white"
                   viewBox="0 0 28 28"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
