@@ -1,10 +1,11 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 const order = ref({});
 const route = useRoute();
 const router = useRouter();
+const selectedStatus = ref('');
 //make a new Primus connection
 let primus = new Primus('https://sneaker-api-4zoy.onrender.com');
 
@@ -32,6 +33,34 @@ const fetchOrder = async () => {
     router.push('/error');
   }
 };
+
+//update function: when the status of the order is changed, the order is updated in the database
+const updateOrderStatus = async () => {
+  const id = route.params.id;
+  const status = selectedStatus.value;
+  console.log(status);
+  try{
+    const token = localStorage.getItem('token');
+    const response = await fetch(`https://sneaker-api-4zoy.onrender.com/api/v1/shoes/${id}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({status: status}),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    console.log('Order updated:', id);
+    router.push('/orders');
+  } catch (error) {
+    console.error('Error updating order:', error);
+    router.push('/error');
+  }
+}
 
 onMounted(fetchOrder);
 
@@ -78,6 +107,12 @@ const confirmRemoveOrder = () => {
     removeOrder();
   }
 };
+
+watch(() => selectedStatus.value, (newStatus, oldStatus) => {
+  if (newStatus !== oldStatus) {
+    updateOrderStatus();
+  }
+}, { immediate: false });
 </script>
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
@@ -130,8 +165,7 @@ const confirmRemoveOrder = () => {
           </label>
           <select
             id="status"
-            v-model.trim="order.status"
-            aria-labelledby="statusLabelId"
+            v-model="selectedStatus"
             class="w-2/3 p-2 border rounded text-gray-800 focus:outline-none focus:border-green-500 focus:ring focus:ring-green-200"
           >
             <option value="in progress" class="text-yellow-500">In progress</option>
