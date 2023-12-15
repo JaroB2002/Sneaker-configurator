@@ -354,8 +354,31 @@ const sortedShoes = computed(() => {
     }
   }
 
-  @media (max-width: 768px) {
-    /* Responsive styling for medium screens (tablets) */
+  @media (min-width: 641px) and (max-width: 768px) {
+  /* Responsive styling for medium screens (tablets) */
+  table {
+    display: block;
+    overflow-x: auto; /* Enables horizontal scrolling for the table */
+    white-space: nowrap;
+  }
+  th, td {
+    min-width: 100px; /* Adjust as needed for your content */
+  }}
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  /* Responsive styling for screens between tablet and desktop */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th, td {
+    min-width: 150px; /* Adjust as needed for your content */
+  }
+}
+
+  @media (max-width: 1024px) {
+    /* Responsive styling for tablets */
     th, td {
       min-width: 100px; /* Adjust as needed for your content */
     }
