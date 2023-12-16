@@ -68,9 +68,9 @@ const showFeedback = (message, success = true) => {
     <div class="bg-white p-8 rounded shadow-md w-96 text-black relative z-10">
       <h2 class="text-3xl font-bold mb-6">Log in with your account</h2>
 
-      <div class="alert hidden bg-gray-300 p-2 mb-4 font-bold">
-        Here is some feedback
-      </div>
+      <div class="alert hidden bg-white p-2 mb-4 font-bold" :style="{ color: '#FF0000' }">
+  Here is some feedback
+</div>
 
       <div class="mb-8">
         <label for="email" class="block text-sm font-bold text-gray-700">Email</label>
@@ -119,7 +119,6 @@ const showFeedback = (message, success = true) => {
     position: absolute;
   }
   .alert {
-  background-color: #69FF47; /* Background color for the feedback container */
   text-decoration-color: white; /* Text color for the feedback message */
 }
 
