@@ -224,18 +224,17 @@ const sortedShoes = computed(() => {
   </h4>
   <div class="text-black">
 
-    <router-link to="/settings" class="text-white-500 font-bold hover:underline">Go to settings</router-link>
+      <router-link to="/settings" class="text-white-500 font-bold hover:underline">Go to settings</router-link>
+    </div>
   </div>
-</div>
-</div>
+  </div>
           </div>        
         </div>
 
         <!-- Order table -->
-
         <div
         class="flex flex-col items-center justify-flex-start min-h-screen bg-gray-100 text-gray-800 pb-8">
-        >
+        
           <h1 class="w-full text-4xl font-bold mb-10 pt-10 text-left pl-10">
             Order overview
           </h1>
