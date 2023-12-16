@@ -7,6 +7,8 @@ const router = useRouter();
 const store = useStore();
 const email = ref('');
 const password = ref('');
+const feedbackMessage = ref('');
+const isSuccess = ref(true);
 
 const logIn = async () => {
   try {
@@ -24,26 +26,22 @@ const logIn = async () => {
     const json = await response.json();
 
     if (json.status === 'success') {
-      showFeedback("Successfully logged in");
+      feedbackMessage.value = "Successfully logged in";
+      isSuccess.value = true;
+
       let token = json.data.token;
       localStorage.setItem('token', token);
       store.commit('setToken', token);
-      //console.log('Token in store:', store.state.token);
-      router.push('/orders'); // Redirect to the home page
+      router.push('/orders');
     } else {
-      showFeedback("Failed to login");
+      feedbackMessage.value = "Failed to login";
+      isSuccess.value = false;
     }
   } catch (error) {
     console.error('Error during login:', error);
   }
 };
 
-const showFeedback = (message, success = true) => {
-  let feedback = document.querySelector('.alert');
-  feedback.textContent = message;
-  feedback.classList.remove('hidden');
-  feedback.style.color = success ? '#4AD22E' : '#FF0000'; // Set color based on success status
-};
 </script>
 
 <template>
@@ -67,6 +65,9 @@ const showFeedback = (message, success = true) => {
     <!-- Login Form -->
     <div class="bg-white p-8 rounded shadow-md w-96 text-black relative z-10">
       <h2 class="text-3xl font-bold mb-6">Log in with your account</h2>
+      <div v-if="feedbackMessage" :style="{ color: isSuccess ? '#4AD22E' : '#FF0000' }" class="mb-4 font-bold">
+        {{ feedbackMessage }}
+      </div>
 
       <div class="alert hidden bg-white p-2 mb-4 font-bold" :style="{ color: '#FF0000' }">
   Here is some feedback
@@ -94,12 +95,10 @@ const showFeedback = (message, success = true) => {
         />
       </div>
 
-      <button
-  @click="logIn"
-  class="btn btn--primary bg-blue-500 text-white font-bold p-4 rounded-none cursor-pointer transition-all duration-300 ease-in-out hover:bg-#4AD22E hover:shadow-md w-full"
->
-  Log in
-</button>
+      <button @click="logIn" class="btn btn--primary bg-blue-500 text-white font-bold p-4 rounded-none cursor-pointer transition-all duration-300 ease-in-out hover:bg-#4AD22E hover:shadow-md w-full">
+        Log in
+      </button>
+
 
       <!-- Link to Signup -->
       <div class="mt-4 text-center text-sm text-gray-700">
@@ -118,9 +117,10 @@ const showFeedback = (message, success = true) => {
     overflow: hidden;
     position: absolute;
   }
+
   .alert {
-  text-decoration-color: white; /* Text color for the feedback message */
-}
+    color: #FF0000; /* Set text color for the feedback message */
+  }
 
 
   .rectangles {
