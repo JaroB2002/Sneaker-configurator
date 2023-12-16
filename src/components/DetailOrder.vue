@@ -120,7 +120,7 @@ watch(() => selectedStatus.value, (newStatus, oldStatus) => {
 </script>
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="w-full max-w-md p-6 bg-white rounded-md shadow-md">
+    <div class="w-full max-w-md p-6 bg-white shadow-md">
       <div class="text-center">
         <h1 class="text-3xl font-bold text-black mb-4">Order Details</h1>
       </div>
@@ -170,7 +170,7 @@ watch(() => selectedStatus.value, (newStatus, oldStatus) => {
           <select
             id="status"
             v-model="selectedStatus"
-            class="w-2/3 p-2 border rounded text-gray-800 focus:outline-none focus:border-green-500 focus:ring focus:ring-green-200"
+            class="w-2/3 p-2 text-gray-800 focus:outline-none focus:border-green-500 focus:ring focus:ring-green-200"
           >
             <option value="in progress" class="text-yellow-500">In progress</option>
             <option value="accepted">Accepted</option>
@@ -180,12 +180,12 @@ watch(() => selectedStatus.value, (newStatus, oldStatus) => {
       </div>
       <div class="flex justify-center space-x-4">
         <!-- Single button with confirmation dialog -->
-        <button @click="confirmRemoveOrder" class="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600">
+        <button @click="confirmRemoveOrder" class="w-full p-2 bg-red-500 text-white hover:bg-red-600">
           Remove Order
         </button>
 
         <!-- Link to "/#/Orders/" with text "Go back" -->
-        <router-link to="/orders" class="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 inline-block text-center">Go back</router-link>
+        <router-link to="/orders" class="w-full p-2 bg-blue-500 text-white hover:bg-blue-600 inline-block text-center">Go back</router-link>
       </div>
     </div>
   </div>
