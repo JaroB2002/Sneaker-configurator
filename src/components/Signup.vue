@@ -6,6 +6,13 @@ const password = ref('');
 
 const signUp = async () => {
   try {
+    // Basis e-mail validatie
+    const emailIsValid = isValidEmail(email.value);
+    if (!emailIsValid) {
+      showFeedback("Invalid email address", false);
+      return;
+    }
+
     const response = await fetch('https://sneaker-api-4zoy.onrender.com/users/signup', {
       method: 'POST',
       headers: {
@@ -20,12 +27,12 @@ const signUp = async () => {
     const json = await response.json();
 
     if (json.status === 'success') {
-      showFeedback("Account created successfully");
+      showFeedback("Account created successfully", true);
       let token = json.data.token;
       localStorage.setItem('token', token);
       window.location.href = "/";
     } else {
-      showFeedback("Account creation failed");
+      showFeedback("Account creation failed", false);
     }
   } catch (error) {
     console.error('Error during signup:', error);
@@ -37,6 +44,12 @@ const showFeedback = (message, success = true) => {
   feedback.textContent = message;
   feedback.classList.remove('hidden');
   feedback.style.color = success ? '#4AD22E' : '#FF0000'; // Set color based on success status
+};
+
+// Function to check if the email address is valid
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 };
 </script>
 
