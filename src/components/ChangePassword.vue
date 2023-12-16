@@ -9,6 +9,8 @@ const newPassword = ref('');
 const confirmPassword = ref('');
 const successMessage = ref('');
 const errorMessage = ref('');
+const logoutSuccessMessage = ref('');
+
 
 const updatePassword = async () => {
   try {
@@ -49,8 +51,15 @@ const updatePassword = async () => {
 };
 
 const logout = () => {
-  // Add your logout logic here
-  //console.log('Logout clicked');
+
+  logoutSuccessMessage.value = 'You have been successfully logged out. Redirecting...';
+
+  setTimeout(() => {
+    router.push('/');
+  }, 2000); // Redirect after 2 seconds (adjust the delay as needed)
+};
+const goBack = () => {
+  router.push('/orders');
 };
 </script>
 
@@ -82,13 +91,16 @@ const logout = () => {
       </form>
     </div>
 
-    <!-- Log Out Section -->
     <div class="mt-8">
       <h2 class="text-2xl font-semibold mb-2">Log Out</h2>
       <p>Ready to leave? Click the button below to log out.</p>
-      <div class="flex justify-end mt-4">
-        <button @click="logout" class="px-4 py-2 bg-red-500 text-white rounded-md">Log Out</button>
+      <div class="flex justify-between mt-4">
+        <!-- Align the blue button to the left -->
+        <button @click="goBack" class="px-4 py-2 bg-blue-500 text-white -md">No, go back</button>
+        
+        <button @click.prevent="logout" class="px-4 py-2 bg-red-500 text-white -md">Yes, log Out</button>
       </div>
+      <div v-if="logoutSuccessMessage" class="mt-4 text-green-500 font-bold">{{ logoutSuccessMessage }}</div>
     </div>
   </div>
 </template>
