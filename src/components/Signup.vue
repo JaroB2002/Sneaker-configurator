@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue';
+import zxcvbn from 'zxcvbn';
 
 const email = ref('');
 const password = ref('');
+let passwordStrength = 0;
 
 const signUp = async () => {
   try {
@@ -10,6 +12,14 @@ const signUp = async () => {
     const emailIsValid = isValidEmail(email.value);
     if (!emailIsValid) {
       showFeedback("Invalid email address", false);
+      return;
+    }
+
+    const passwordResult = zxcvbn(password.value);
+    passwordStrength = passwordResult.score;
+
+    if (passwordStrength < 3) {
+      showFeedback("Weak password. Please choose a stronger password.", false);
       return;
     }
 
@@ -39,14 +49,19 @@ const signUp = async () => {
   }
 };
 
+const checkPasswordStrength = () => {
+  const passwordResult = zxcvbn(password.value);
+  passwordStrength = passwordResult.score;
+};
+
 const showFeedback = (message, success = true) => {
-  let feedback = document.querySelector('.alert');
+  const feedback = document.querySelector('.alert');
   feedback.textContent = message;
   feedback.classList.remove('hidden');
   feedback.style.color = success ? '#4AD22E' : '#FF0000'; // Set color based on success status
 };
 
-// Function to check if the email address is valid
+// Functie om te controleren of het e-mailadres geldig is
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -54,86 +69,86 @@ const isValidEmail = (email) => {
 </script>
 
 <template>
-    <div class="relative flex items-center justify-center h-screen overflow-hidden">
-      <!-- Background Animation -->
-      <div class="area">
-        <ul class="rectangles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </div>
-  
-      <!-- Sign-up Form -->
-      <div class="bg-white p-8 rounded shadow-md w-96 text-black relative z-10">
-        <h2 class="text-3xl font-bold mb-6">Create an account</h2>
-  
-        <div class="alert hidden bg-gray-300 p-2 mb-4 font-bold">
-          Here is some feedback
-        </div>
-  
-        <div class="mb-8">
-          <label for="email" class="block text-sm font-bold text-gray-700">Email</label>
-          <input
-            type="text"
-            class="input--text w-full p-2 border rounded-none focus:outline-none focus:border-blue-500"
-            name="email"
-            id="email"
-            v-model="email"
-          />
-        </div>
-  
-        <div class="mb-8">
-          <label for="password" class="block text-sm font-bold text-gray-700">Password</label>
-          <input
-            type="password"
-            class="input--text w-full p-2 border rounded-none focus:outline-none focus:border-blue-500"
-            name="password"
-            id="password"
-            v-model="password"
-          />
-        </div>
-  
-        <button
-  @click="signUp"
-  class="btn btn--primary bg-green-500 text-white font-bold p-4 rounded-none cursor-pointer transition-all duration-300 ease-in-out hover:bg-#4AD22E hover:shadow-md w-full"
->
-  Sign up
-</button>
-  
-        <!-- Link to Login -->
-        <div class="mt-4 text-center text-sm text-gray-700">
-  Already have an account? <router-link to="/" class="text-white-500 font-bold hover:underline">Login</router-link>
-</div>
+  <div class="relative flex items-center justify-center h-screen overflow-hidden">
+    <!-- Background Animation -->
+    <div class="area">
+      <ul class="rectangles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
 
+    <!-- Sign-up Form -->
+    <div class="bg-white p-8 rounded shadow-md w-96 text-black relative z-10">
+      <h2 class="text-3xl font-bold mb-6">Create an account</h2>
+
+      <div class="alert hidden bg-gray-300 p-2 mb-4 font-bold">
+        Here is some feedback
+      </div>
+
+      <div class="mb-8">
+        <label for="email" class="block text-sm font-bold text-gray-700">Email</label>
+        <input
+          type="text"
+          class="input--text w-full p-2 border rounded-none focus:outline-none focus:border-blue-500"
+          name="email"
+          id="email"
+          v-model="email"
+        />
+      </div>
+
+      <div class="mb-8">
+        <label for="password" class="block text-sm font-bold text-gray-700">Password</label>
+        <input
+          type="password"
+          class="input--text w-full p-2 border rounded-none focus:outline-none focus:border-blue-500"
+          name="password"
+          id="password"
+          v-model="password"
+        />
+      </div>
+
+      <button
+        @click="signUp"
+        class="btn btn--primary bg-green-500 text-white font-bold p-4 rounded-none cursor-pointer transition-all duration-300 ease-in-out hover:bg-#4AD22E hover:shadow-md w-full"
+      >
+        Sign up
+      </button>
+
+      <!-- Link to Login -->
+      <div class="mt-4 text-center text-sm text-gray-700">
+        Already have an account? <router-link to="/" class="text-white-500 font-bold hover:underline">Login</router-link>
       </div>
     </div>
-  </template>
-  
-  
-  <style scoped>
-    .input--text {
+  </div>
+</template>
+
+<style scoped>
+  .input--text {
     border-color: #69FF47; /* Border color for text fields */
   }
+
   .btn--primary {
     background-color: #69FF47; /* Background color for the login button */
   }
 
   .alert {
-  background-color: #69FF47; /* Background color for the feedback container */
-  color: white; /* Text color for the feedback message */
-}
+    background-color: #69FF47; /* Background color for the feedback container */
+    color: white; /* Text color for the feedback message */
+  }
 
-.alert.success {
-  color: #4AD22E; /* Text color for success messages */
-}
+  .alert.success {
+    color: #4AD22E; /* Text color for success messages */
+  }
+
   .area {
     background: #1C1B1F;
     width: 100%;
