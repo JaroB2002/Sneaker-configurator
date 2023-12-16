@@ -235,7 +235,7 @@ const sortedShoes = computed(() => {
 
         <div
         class="flex flex-col items-center justify-flex-start min-h-screen bg-gray-100 text-gray-800 pb-8">
-        >
+        
           <h1 class="w-full text-4xl font-bold mb-10 pt-10 text-left pl-10">
             Order overview
           </h1>
