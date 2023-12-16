@@ -28,7 +28,7 @@ const logIn = async () => {
       let token = json.data.token;
       localStorage.setItem('token', token);
       store.commit('setToken', token);
-      console.log('Token in store:', store.state.token);
+      //console.log('Token in store:', store.state.token);
       router.push('/orders'); // Redirect to the home page
     } else {
       showFeedback("Failed to login");
@@ -38,10 +38,11 @@ const logIn = async () => {
   }
 };
 
-const showFeedback = (message) => {
+const showFeedback = (message, success = true) => {
   let feedback = document.querySelector('.alert');
   feedback.textContent = message;
   feedback.classList.remove('hidden');
+  feedback.style.color = success ? '#4AD22E' : '#FF0000'; // Set color based on success status
 };
 </script>
 
@@ -117,6 +118,11 @@ const showFeedback = (message) => {
     overflow: hidden;
     position: absolute;
   }
+  .alert {
+  background-color: #69FF47; /* Background color for the feedback container */
+  text-decoration-color: white; /* Text color for the feedback message */
+}
+
 
   .rectangles {
     position: absolute;
