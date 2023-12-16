@@ -8,9 +8,14 @@ const oldPassword = ref('');
 const newPassword = ref('');
 const confirmPassword = ref('');
 const successMessage = ref('');
+const errorMessage = ref('');
 
 const updatePassword = async () => {
   try {
+    if (newPassword.value !== confirmPassword.value) {
+      errorMessage.value = "New password does not match the confirmed password";
+      return;
+    }
     const response = await fetch('https://sneaker-api-4zoy.onrender.com/admin/change-password', {
       method: 'PUT',
       headers: {
@@ -55,6 +60,7 @@ const logout = () => {
     <div>
       <h2 class="text-2xl font-semibold mb-6">Change Password</h2>
       <div v-if="successMessage" class="mb-4 text-green-500 font-bold">{{ successMessage }}</div>
+      <div v-if="errorMessage" class="mb-4 text-red-500 font-bold">{{ errorMessage }}</div>
       <form @submit.prevent="updatePassword">
         <div class="mb-4">
           <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username:</label>
