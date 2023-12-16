@@ -33,7 +33,7 @@ const routes = [
     { path: '/orders', component: Overview, meta: {requiresAuth: true}},
     { path: '/orders/:id', component: DetailOrder, props: true}, // zowat de get variabele, een dynamische route aangezien je niet op voorhand weet wat id is
     { path: '/signup', component: Signup },
-    { path: '/change-password', component: ChangePassword, meta: {requiresAuth: true}}
+    { path: '/settings', component: ChangePassword, meta: {requiresAuth: true}},
 ]
 
 const router = VueRouter.createRouter({
