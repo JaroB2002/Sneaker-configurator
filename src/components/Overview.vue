@@ -224,7 +224,7 @@ const sortedShoes = computed(() => {
   </h4>
   <div class="text-black">
 
-    <router-link to="/change-password" class="text-white-500 font-bold hover:underline">Go to settings</router-link>
+    <router-link to="/settings" class="text-white-500 font-bold hover:underline">Go to settings</router-link>
   </div>
 </div>
 </div>
