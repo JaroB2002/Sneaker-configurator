@@ -141,7 +141,6 @@ const isValidEmail = (email) => {
   }
 
   .alert {
-    background-color: #69FF47; /* Background color for the feedback container */
     color: white; /* Text color for the feedback message */
   }
 
