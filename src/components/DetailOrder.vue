@@ -10,7 +10,8 @@ const selectedStatus = ref('');
 let primus = new Primus('https://sneaker-api-4zoy.onrender.com');
 
 primus.on('open', () => {
-  console.log('Connection is alive and kicking')});
+  console.log('Connection is alive and kicking')
+});
 
 const fetchOrder = async () => {
   const id = route.params.id;
@@ -39,7 +40,7 @@ const updateOrderStatus = async () => {
   const id = route.params.id;
   const status = selectedStatus.value;
   console.log(status);
-  try{
+  try {
     const token = localStorage.getItem('token');
     const response = await fetch(`https://sneaker-api-4zoy.onrender.com/api/v1/shoes/${id}`, {
       method: 'PATCH',
@@ -47,16 +48,16 @@ const updateOrderStatus = async () => {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({status: status}),
+      body: JSON.stringify({ status: status }),
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    if(primus.readyState == Primus.OPEN){
-        primus.write(JSON.stringify({action: 'updateStatus', response: response}));
-      }
+    if (primus.readyState == Primus.OPEN) {
+      primus.write(JSON.stringify({ action: 'updateStatus', response: response }));
+    }
 
     console.log('Order updated:', id);
     router.push('/orders');
@@ -91,8 +92,8 @@ const removeOrder = async () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      if(primus.readyState == Primus.OPEN){
-        primus.write(JSON.stringify({action: 'delete'}));
+      if (primus.readyState == Primus.OPEN) {
+        primus.write(JSON.stringify({ action: 'delete' }));
       }
 
       console.log('Order deleted:', id);
@@ -130,15 +131,15 @@ watch(() => selectedStatus.value, (newStatus, oldStatus) => {
           <span class="font-bold text-green-500">{{ order._id }}</span>
         </div>
         <div class="mb-4" v-if="order.user">
-      <div class="flex justify-between mb-2">
-        <span class="text-gray-700">Client:</span>
-        <span class="font-bold text-green-500">{{ order.user.username }}</span>
-      </div>
-      <div class="flex justify-between mb-2">
-        <span class="text-gray-700">Email:</span>
-        <a :href="'mailto:' + order.email" class="font-bold text-blue-500">{{ order.user.email }}</a>
-      </div>
-    </div>
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-700">Client:</span>
+            <span class="font-bold text-green-500">{{ order.user.username }}</span>
+          </div>
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-700">Email:</span>
+            <a :href="'mailto:' + order.email" class="font-bold text-blue-500">{{ order.user.email }}</a>
+          </div>
+        </div>
         <div class="flex justify-between mb-2">
           <span class="text-gray-700">Date:</span>
           <span class="font-bold text-gray-800">{{ new Date(order.date).toLocaleDateString() }}</span>
@@ -167,11 +168,8 @@ watch(() => selectedStatus.value, (newStatus, oldStatus) => {
           <label for="status" class="block text-sm font-medium text-gray-700">
             Change Status:
           </label>
-          <select
-            id="status"
-            v-model="selectedStatus"
-            class="w-2/3 p-2 text-gray-800 focus:outline-none focus:border-green-500 focus:ring focus:ring-green-200"
-          >
+          <select id="status" v-model="selectedStatus"
+            class="w-2/3 p-2 text-gray-800 focus:outline-none focus:border-green-500 focus:ring focus:ring-green-200">
             <option value="in progress" class="text-yellow-500">In progress</option>
             <option value="accepted">Accepted</option>
             <option value="denied" class="text-red-500">Denied</option>
@@ -185,7 +183,8 @@ watch(() => selectedStatus.value, (newStatus, oldStatus) => {
         </button>
 
         <!-- Link to "/#/Orders/" with text "Go back" -->
-        <router-link to="/orders" class="w-full p-2 bg-blue-500 text-white hover:bg-blue-600 inline-block text-center">Go back</router-link>
+        <router-link to="/orders" class="w-full p-2 bg-blue-500 text-white hover:bg-blue-600 inline-block text-center">Go
+          back</router-link>
       </div>
     </div>
   </div>

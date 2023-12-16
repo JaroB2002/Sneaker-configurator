@@ -77,17 +77,22 @@ const goBack = () => {
         </div>
         <div class="mb-4">
           <label for="oldPassword" class="block text-gray-700 text-sm font-bold mb-2">Current Password:</label>
-          <input v-model="oldPassword" type="password" id="oldPassword" name="oldPassword" class="w-full px-4 py-2 border">
+          <input v-model="oldPassword" type="password" id="oldPassword" name="oldPassword"
+            class="w-full px-4 py-2 border">
         </div>
         <div class="mb-4">
           <label for="newPassword" class="block text-gray-700 text-sm font-bold mb-2">New Password:</label>
-          <input v-model="newPassword" type="password" id="newPassword" name="newPassword" class="w-full px-4 py-2 border">
+          <input v-model="newPassword" type="password" id="newPassword" name="newPassword"
+            class="w-full px-4 py-2 border">
         </div>
         <div class="mb-6">
           <label for="confirmPassword" class="block text-gray-700 text-sm font-bold mb-2">Confirm New Password:</label>
-          <input v-model="confirmPassword" type="password" id="confirmPassword" name="confirmPassword" class="w-full px-4 py-2 border">
+          <input v-model="confirmPassword" type="password" id="confirmPassword" name="confirmPassword"
+            class="w-full px-4 py-2 border">
         </div>
-        <button type="submit" class="bg-[#69FF47] text-white w-full max-w-md px-4 py-2 transition duration-300 ease-in-out hover:shadow-md">Change Password</button>
+        <button type="submit"
+          class="bg-[#69FF47] text-white w-full max-w-md px-4 py-2 transition duration-300 ease-in-out hover:shadow-md">Change
+          Password</button>
       </form>
     </div>
 
@@ -97,7 +102,7 @@ const goBack = () => {
       <div class="flex justify-between mt-4">
         <!-- Align the blue button to the left -->
         <button @click="goBack" class="px-4 py-2 bg-blue-500 text-white -md">No, go back</button>
-        
+
         <button @click.prevent="logout" class="px-4 py-2 bg-red-500 text-white -md">Yes, log Out</button>
       </div>
       <div v-if="logoutSuccessMessage" class="mt-4 text-green-500 font-bold">{{ logoutSuccessMessage }}</div>
@@ -105,5 +110,4 @@ const goBack = () => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
