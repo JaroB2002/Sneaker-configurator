@@ -6,6 +6,7 @@ const order = ref({});
 const route = useRoute();
 const router = useRouter();
 const selectedStatus = ref('');
+const successMessage = ref('');
 //make a new Primus connection
 let primus = new Primus('https://sneaker-api-4zoy.onrender.com');
 
@@ -60,7 +61,14 @@ const updateOrderStatus = async () => {
     }
 
     console.log('Order updated:', id);
-    router.push('/orders');
+
+    // Toon de succesmelding
+    successMessage.value = 'Order status successfully updated!';
+
+    // Wacht 2 seconden en ga dan terug naar het overzicht
+    setTimeout(() => {
+      router.push('/orders');
+    }, 2000);
   } catch (error) {
     console.error('Error updating order:', error);
     router.push('/error');
@@ -177,15 +185,19 @@ watch(() => selectedStatus.value, (newStatus, oldStatus) => {
         </div>
       </div>
       <div class="flex justify-center space-x-4">
-        <!-- Single button with confirmation dialog -->
-        <button @click="confirmRemoveOrder" class="w-full p-2 bg-red-500 text-white hover:bg-red-600">
-          Remove Order
-        </button>
+      <!-- Single button with confirmation dialog -->
+      <button @click="confirmRemoveOrder" class="w-full p-2 bg-red-500 text-white hover:bg-red-600">
+        Remove Order
+      </button>
 
-        <!-- Link to "/#/Orders/" with text "Go back" -->
-        <router-link to="/orders" class="w-full p-2 bg-blue-500 text-white hover:bg-blue-600 inline-block text-center">Go
-          back</router-link>
-      </div>
+      <!-- Link to "/#/Orders/" with text "Go back" -->
+      <router-link to="/orders" class="w-full p-2 bg-blue-500 text-white hover:bg-blue-600 inline-block text-center">Go
+        back</router-link>
+    </div>
+
+    <div v-if="successMessage" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-green-500 text-white">
+      {{ successMessage }}
+    </div>
     </div>
   </div>
 </template>
