@@ -6,14 +6,15 @@ const router = useRouter();
 const ordersCount = ref(0);
 const usersCount = ref(0);
 const shoes = ref([]);
+const thirdCardCount = ref();
 
 //make a new Primus connection
 let primus = new Primus("https://sneaker-api-4zoy.onrender.com");
 primus.on("open", () => {
-  console.log("Connection is alive and kicking");
+  //console.log("Connection is alive and kicking");
 });
 primus.on("data", (json) => {
-  console.log("Received a new message from the server", json);
+  //console.log("Received a new message from the server", json);
   if (json.action == "update") {
     //update the order counter
     ordersCount.value = json.data.count;
