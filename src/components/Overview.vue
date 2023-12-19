@@ -6,6 +6,9 @@ const router = useRouter();
 const ordersCount = ref(0);
 const usersCount = ref(0);
 const shoes = ref([]);
+const filteredStatus = ref("all");
+const thirdCardCount = ref();
+
 
 //make a new Primus connection
 let primus = new Primus("https://sneaker-api-4zoy.onrender.com");
@@ -35,7 +38,9 @@ primus.on("data", (json) => {
 const searchQuery = ref("");
 const filteredShoes = computed(() => {
   return shoes.value.filter((shoe) => {
-    return shoe._id.toLowerCase().includes(searchQuery.value.toLowerCase());
+    const includesSearch = shoe._id.toLowerCase().includes(searchQuery.value.toLowerCase());
+    const matchesStatus = filteredStatus.value === "all" || shoe.status === filteredStatus.value;
+    return includesSearch && matchesStatus;
   });
 });
 onMounted(async () => {
